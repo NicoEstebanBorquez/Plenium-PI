@@ -34,7 +34,6 @@ public class ClienteController {
     @PostMapping("/guardar-cliente")
     public String guardar(@Valid Cliente cliente, Errors errores) {
         if (errores.hasErrors()) {
-            System.out.println("ClienteController - guardar() - hay errores");
             return "nuevo_cliente";
         }
         clienteService.guardar(cliente);
