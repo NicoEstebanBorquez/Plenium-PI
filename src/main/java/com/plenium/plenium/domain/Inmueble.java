@@ -1,11 +1,13 @@
 package com.plenium.plenium.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @Entity
@@ -17,18 +19,23 @@ public class Inmueble implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idInmueble;
+    
+    private Date fechaPublicacion;
 
     @NotEmpty
     private String denominacion;
 
-    private Integer tipo;
+    @NotEmpty
+    private String tipo;
 
+    //@NotNull
     private Double precio;
 
     private Double superficieUtil;
 
     private Double superficieTotal;
 
+    @NotEmpty
     private String direccion;
 
     @NotEmpty
@@ -37,10 +44,10 @@ public class Inmueble implements Serializable {
     @NotEmpty
     private String provincia;
 
-    @NotNull
+    //@NotNull
     private Integer dormitorios;
 
-    @NotNull
+    //@NotNull
     private Integer banos;
 
     private Integer amueblado;
@@ -67,16 +74,19 @@ public class Inmueble implements Serializable {
 
     private Integer piscina;
 
-    private Date fechaPublicacion;
-
+    @NotEmpty
     private String propietarioNombre;
 
+    @NotEmpty
     private String propietarioApellidos;
 
     private String propietarioNif;
 
+    @NotEmpty
     private String propietarioTelefono;
 
+    @NotEmpty
+    @Email
     private String propietarioEmail;
 
     private Integer idUsuario;

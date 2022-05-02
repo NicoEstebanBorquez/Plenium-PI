@@ -8,16 +8,16 @@
     <title>Plenium</title>
 
     <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -52,7 +52,7 @@
                 Inmuebles
             </div>
 
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" th:href="@{/cartera-inmuebles}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Cartera de Inmuebles</span></a>
@@ -143,7 +143,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -175,7 +175,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Cartera de Inmuebles</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Ver Inmueble</h1>
                     <p class="mb-4">Descripción de la tabla.</p>
 
                     <!-- DataTales Example -->
@@ -183,59 +183,138 @@
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Título secundario</h6>
                             <br>
-                            <a th:href="@{/nuevo-inmueble}" class="btn btn-success btn-icon-split btn-sm"><span
-                                    class="icon text-white-50"> <i class="fas fa-edit"> </i></span><span
-                                    class="text">Añadir nuevo inmueble</span></a>
+                            <a th:href="@{/cartera-inmuebles}" th:text="Atrás" class="btn btn-secondary">Atrás</a>
+                            <a th:href="@{/editar-inmueble/} + ${inmueble.idInmueble}" th:text="Editar"
+                                class="btn btn-secondary">Editar</a>
+                            <a th:href="@{/eliminar-inmueble/} + ${inmueble.idInmueble}" th:text="Eliminar"
+                                class="btn btn-secondary">Eliminar</a>
                         </div>
                         <div class="card-body">
-                            <!--TABLA-->
-                            <div class="table-responsive"
-                                th:if="${listaInmueblesModel != null and !listaInmueblesModel.empty}">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Denominación</th>
-                                            <th>Población</th>
-                                            <th>Provincia</th>
-                                            <th>Acciones 1</th>
-                                            <th>Acciones 2</th>
-                                            <th>Acciones 3</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Denominación</th>
-                                            <th>Población</th>
-                                            <th>Provincia</th>
-                                            <th>Acciones 1</th>
-                                            <th>Acciones 2</th>
-                                            <th>Acciones 3</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr th:each="inmueble : ${listaInmueblesModel}">
-                                            <td th:text="${inmueble.idInmueble}"></td>
-                                            <td th:text="${inmueble.denominacion}"></td>
-                                            <td th:text="${inmueble.poblacion}"></td>
-                                            <td th:text="${inmueble.provincia}"></td>
-                                            <td> <a sec:authorize="hasRole('ROLE_ADMIN')"
-                                                th:href="@{/ver-inmueble/} + ${inmueble.idInmueble}"
-                                                th:text="Ver" /> </td>
-                                            <td> <a sec:authorize="hasRole('ROLE_ADMIN')"
-                                                    th:href="@{/editar-inmueble/} + ${inmueble.idInmueble}"
-                                                    th:text="Editar"/> </td>
-                                            <td> <a sec:authorize="hasRole('ROLE_ADMIN')"
-                                                    th:href="@{/eliminar-inmueble/} +${inmueble.idInmueble}"
-                                                    th:text="Eliminar" /> </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+
+                            <div class="table-responsive">
+
+                                <form th:object="${inmueble}" class="user">
+                                    <input type="hidden" name="idInmueble" th:field="*{idInmueble}" />
+
+                                    <label for="denominacion">Denominacion:</label>
+                                    <label th:text="*{denominacion}"></label>
+                                    <br />
+
+                                    <label for="tipo">Tipo:</label>
+                                    <label th:text="*{tipo}"></label>
+                                    <br />
+
+                                    <label for="precio">Precio:</label>
+                                    <label th:text="*{precio}"></label>
+                                    <br />
+
+                                    <label for="superficieUtil">Superficie útil:</label>
+                                    <label th:text="*{superficieUtil}"></label>
+                                    <br />
+
+                                    <label for="superficieTotal">Superficie total:</label>
+                                    <label th:text="*{superficieTotal}"></label>
+                                    <br />
+
+                                    <label for="direccion">Dirección:</label>
+                                    <label th:text="*{direccion}"></label>
+                                    <br />
+
+                                    <label for="poblacion">Población:</label>
+                                    <label th:text="*{poblacion}"></label>
+                                    <br />
+
+                                    <label for="provincia">Provincia:</label>
+                                    <label th:text="*{provincia}"></label>
+                                    <br />
+
+                                    <label for="dormitorios">Dormitorios:</label>
+                                    <label th:text="*{dormitorios}"></label>
+                                    <br />
+
+                                    <label for="banos">Baños:</label>
+                                    <label th:text="*{banos}"></label>
+                                    <br />
+
+                                    <label for="amueblado">Amueblado:</label>
+                                    <label th:text="*{amueblado}"></label>
+                                    <br />
+
+                                    <label for="semiAmueblado">Semi-amueblado:</label>
+                                    <label th:text="*{semiAmueblado}"></label>
+                                    <br />
+
+                                    <label for="noAmueblado">No amueblado:</label>
+                                    <label th:text="*{noAmueblado}"></label>
+                                    <br />
+
+                                    <label for="cocinaEquipada">Cocina equipada:</label>
+                                    <label th:text="*{cocinaEquipada}"></label>
+                                    <br />
+
+                                    <label for="aireAcondicionado">Aire acondicionado:</label>
+                                    <label th:text="*{aireAcondicionado}"></label>
+                                    <br />
+
+                                    <label for="calefaccionCentral">Calefaccion central:</label>
+                                    <label th:text="*{calefaccionCentral}"></label>
+                                    <br />
+
+                                    <label for="gasNatural">Gas natural:</label>
+                                    <label th:text="*{gasNatural}"></label>
+                                    <br />
+
+                                    <label for="placasSolares">Placas solares:</label>
+                                    <label th:text="*{placasSolares}"></label>
+                                    <br />
+
+                                    <label for="armariosEmpotrados">Armarios empotrados:</label>
+                                    <label th:text="*{armariosEmpotrados}"></label>
+                                    <br />
+
+                                    <label for="aparcamiento">Aparcamiento:</label>
+                                    <label th:text="*{aparcamiento}"></label>
+                                    <br />
+
+                                    <label for="ascensor">Ascensor:</label>
+                                    <label th:text="*{ascensor}"></label>
+                                    <br />
+
+                                    <label for="piscina">Piscina:</label>
+                                    <label th:text="*{piscina}"></label>
+                                    <br />
+
+                                    <label for="fechaPublicacion">Fecha publicación:</label>
+                                    <label th:text="*{fechaPublicacion}"></label>
+                                    <br />
+
+                                    <label for="propietarioNombre">Nombre propietario:</label>
+                                    <label th:text="*{propietarioNombre}"></label>
+                                    <br />
+
+                                    <label for="propietarioApellidos">Apellidos:</label>
+                                    <label th:text="*{propietarioApellidos}"></label>
+                                    <br />
+
+                                    <label for="propietarioNif">NIF:</label>
+                                    <label th:text="*{propietarioNif}"></label>
+                                    <br />
+
+                                    <label for="propietarioTelefono">Teléfono:</label>
+                                    <label th:text="*{propietarioTelefono}"></label>
+                                    <br />
+
+                                    <label for="propietarioEmail">Correo electrónico:</label>
+                                    <label th:text="*{propietarioEmail}"></label>
+                                    <br />
+
+                                    <label for="idUsuario">Usuario:</label>
+                                    <label th:text="*{idUsuario}"></label>
+                                    <br />
+
+                                </form>
                             </div>
-                            <div th:if="${listaInmueblesModel == null or listaInmueblesModel.empty}">
-                                La lista de inmuebles está vacía.
-                            </div>
+
                         </div>
                     </div>
 
@@ -284,22 +363,24 @@
             </div>
         </div>
     </div>
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Bootstrap core JavaScript-->
+<script src="../vendor/jquery/jquery.min.js"></script>
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<!-- Custom scripts for all pages-->
+<script src="../js/sb-admin-2.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+<!-- Page level plugins -->
+<script src="../vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="../js/demo/datatables-demo.js"></script>
+
 </body>
 
 </html>

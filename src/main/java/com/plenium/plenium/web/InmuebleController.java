@@ -6,8 +6,6 @@ import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -42,11 +40,18 @@ public class InmuebleController {
         return "redirect:/cartera-inmuebles";
     }
 
+    @GetMapping("/ver-inmueble/{idInmueble}")
+    public String ver(Inmueble inmueble, Model model) {
+        inmueble = inmuebleService.encontrarInmueble(inmueble);
+        model.addAttribute("inmueble", inmueble);
+        return "ver_inmueble";
+    }
+
     @GetMapping("/editar-inmueble/{idInmueble}")
     public String editar(Inmueble inmueble, Model model) {
         inmueble = inmuebleService.encontrarInmueble(inmueble);
         model.addAttribute("inmueble", inmueble);
-        return "nuevo_inmueble";
+        return "editar_inmueble";
     }
 
     @GetMapping("/eliminar-inmueble/{idInmueble}")
