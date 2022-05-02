@@ -40,6 +40,9 @@ public class Cliente implements Serializable {
     //Column(name = "telefono")
     @NotEmpty
     private String telefono;
+    
+    //Column(name = "tipo")
+    private String tipo;
 
     //Column(name = "precio_min")
     private Integer precioMin;
@@ -55,9 +58,6 @@ public class Cliente implements Serializable {
 
     ////Column(name = "superficie_max")
     private Integer superficieMax;
-
-    ////Column(name = "terraza_balcon")
-    private Integer terrazaBalcon;
 
     ////Column(name = "aparcamiento")
     private Integer aparcamiento;

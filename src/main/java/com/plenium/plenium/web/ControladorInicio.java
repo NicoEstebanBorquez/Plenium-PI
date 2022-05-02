@@ -21,6 +21,11 @@ public class ControladorInicio {
     @Autowired
     private PersonaService personaService;
     
+    @GetMapping("/panel-control")
+    public String irPanelControl(){
+        return "panel_control";
+    }
+    
     @GetMapping("/")
     public String inicio(Model model, @AuthenticationPrincipal User user){
         var personas = personaService.listarPersonas();

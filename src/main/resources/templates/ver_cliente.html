@@ -3,22 +3,22 @@
     xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Plenium - Inmuebles</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Plenium - Clientes</title>
 
     <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -54,7 +54,7 @@
                 Inmuebles
             </div>
 
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" th:href="@{/cartera-inmuebles}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Cartera de Inmuebles</span></a>
@@ -82,7 +82,7 @@
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Lista de Clientes</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" th:href="@{/nuevo-cliente}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Añadir nuevo Cliente</span></a>
@@ -145,7 +145,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -177,7 +177,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Cartera de Inmuebles</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Ver Cliente</h1>
                     <p class="mb-4">Descripción de la tabla.</p>
 
                     <!-- DataTales Example -->
@@ -185,72 +185,95 @@
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Título secundario</h6>
                             <br>
-                            <a th:href="@{/nuevo-inmueble}" class="btn btn-success btn-icon-split btn-sm"><span
-                                    class="icon text-white-50"> <i class="fas fa-edit"> </i></span><span
-                                    class="text">Añadir nuevo inmueble</span></a>
+                            <a th:href="@{/lista-clientes}" th:text="Atrás" class="btn btn-secondary">Atrás</a>
+                            <a th:href="@{/editar-cliente/} + ${cliente.idCliente}" th:text="Editar"
+                                class="btn btn-secondary">Editar</a>
+                            <a th:href="@{/eliminar-cliente/} + ${cliente.idCliente}" th:text="Eliminar"
+                                class="btn btn-secondary">Eliminar</a>
                         </div>
                         <div class="card-body">
 
-                            <!--TABLA-->
-                            <div th:if="${listaInmueblesModel != null and !listaInmueblesModel.empty}">
-                                <table class="table table-bordered" id="tabla-cartera-inmuebles" width="100%"
-                                    cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Denominación</th>
-                                            <th>Población</th>
-                                            <th>Provincia</th>
-                                            <th>Acciones 1</th>
-                                            <th>Acciones 2</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                            <div class="table-responsive">
 
-                                        <tr th:each="inmueble : ${listaInmueblesModel}">
-                                            <td th:text="${inmueble.idInmueble}"></td>
-                                            <td th:text="${inmueble.denominacion}"></td>
-                                            <td th:text="${inmueble.poblacion}"></td>
-                                            <td th:text="${inmueble.provincia}"></td>
-                                            <td> <a sec:authorize="hasRole('ROLE_ADMIN')"
-                                                    th:href="@{/editar-inmueble/} + ${inmueble.idInmueble}"
-                                                    th:text="Editar" /> </td>
-                                            <td> <a sec:authorize="hasRole('ROLE_ADMIN')"
-                                                    th:href="@{/eliminar-inmueble/} +${inmueble.idInmueble}"
-                                                    th:text="Eliminar" /> </td>
-                                        </tr>
-                                    </tbody>
+                                <form th:object="${cliente}" class="user">
+                                    <input type="hidden" name="idCliente" th:field="*{idCliente}" />
 
-                                </table>
+                                    <label for="nombre">Nombre:</label>
+                                    <label th:text="*{nombre}"></label>
+                                    <br />
+
+                                    <label for="primerApellido">Primer apellido:</label>
+                                    <label th:text="*{primerApellido}"></label>
+
+                                    <br />
+
+                                    <label for="segundoApellido">Segundo apellido:</label>
+                                    <label th:text="*{segundoApellido}"></label>
+                                    <br />
+
+                                    <label for="documentoIdentidad">Documento de identidad:</label>
+                                    <label th:text="*{documentoIdentidad}"></label>
+                                    <br />
+
+                                    <label for="email">Correo electrónico:</label>
+                                    <label th:text="*{email}"></label>
+                                    <br />
+
+                                    <label for="telefono">Teléfono:</label>
+                                    <label th:text="*{telefono}"></label>
+                                    <br />
+
+                                    <label for="tipo">Tipo:</label>
+                                    <label th:text="*{tipo}"></label>
+                                    <br />
+
+                                    <label for="precioMin">Precio (min):</label>
+                                    <label th:text="*{precioMin}"></label>
+                                    <br />
+
+                                    <label for="precioMax">Precio (max):</label>
+                                    <label th:text="*{precioMax}"></label>
+                                    <br />
+
+                                    <label for="dormitoriosMin">Dormitorios (min):</label>
+                                    <label th:text="*{dormitoriosMin}"></label>
+                                    <br />
+
+                                    <label for="superficieMin">Superficie (min):</label>
+                                    <label th:text="*{superficieMin}"></label>
+                                    <br />
+
+                                    <label for="superficieMax">Superficie (máx):</label>
+                                    <label th:text="*{superficieMax}"></label>
+                                    <br />
+
+                                    <label for="aparcamiento">Aparcamiento:</label>
+                                    <label th:text="*{aparcamiento}"></label>
+                                    <br />
+
+                                    <label for="ascensor">Ascensor:</label>
+                                    <label th:text="*{ascensor}"></label>
+                                    <br />
+
+                                    <label for="piscina">Piscina:</label>
+                                    <label th:text="*{piscina}"></label>
+                                    <br />
+
+                                    <label for="localidad">Localidad:</label>
+                                    <label th:text="*{localidad}"></label>
+                                    <br />
+
+                                    <label for="provincia">Provincia:</label>
+                                    <label th:text="*{provincia}"></label>
+                                    <br />
+
+                                    <label for="idUsuario">id Usuario:</label>
+                                    <label th:text="*{idUsuario}"></label>
+                                    <br />
+
+                                </form>
                             </div>
-                            <div th:if="${listaInmueblesModel == null or listaInmueblesModel.empty}">
-                                La lista de inmuebles está vacía.
-                            </div>
 
-                            <!--<div class="table-responsive">
-                                                                                                        <table class="table table-bordered" id="tabla-cartera-inmuebles" width="100%" cellspacing="0">
-                                                                                                            <thead>
-                                                                                                                <tr>
-                                                                                                                    <th>ID</th>
-                                                                                                                    <th>Denominación</th>
-                                                                                                                    <th>Población</th>
-                                                                                                                    <th>Provincia</th>
-                                                                                                                    <th>Acciones</th>
-                                                                                                                </tr>
-                                                                                                            </thead>
-                                                                                                       
-                                                                                                            <tbody>
-                                                                                                                <tr>
-                                                                                                                    <td>273</td>
-                                                                                                                    <td>Ático de 2 dormitorios con terraza</td>
-                                                                                                                    <td>Rincón de la Victoria</td>
-                                                                                                                    <td>Málaga</td>
-                                                                                                                </tr>
-                                                                                                            </tbody>
-                                                                                                        </table>
-                                                                                                        <a href="#" onclick="irNuevoInmueble()" class="btn btn-success btn-icon-split btn-sm"><span class="icon text-white-50"> <i class="fas fa-edit"> </i></span><span class="text">Añadir nuevo inmueble</span></a>
-                                                                                                    </div>-->
-                            <!--TABLA-->
                         </div>
                     </div>
 
@@ -301,11 +324,11 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
     <!--<script src="js/sb-admin-2.min.js"></script>-->
@@ -317,14 +340,8 @@
     <!-- Page level custom scripts -->
     <!--<script src="js/demo/datatables-demo.js"></script>-->
 
-    <!--<script src="../static/js/inmuebles.js"></script>-->
+    <!--<script src="js/clientes.js"></script>-->
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
-        crossorigin="anonymous"></script>
 </body>
 
 </html>

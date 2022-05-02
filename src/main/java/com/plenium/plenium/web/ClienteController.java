@@ -40,11 +40,18 @@ public class ClienteController {
         return "redirect:/lista-clientes";
     }
 
+    @GetMapping("/ver-cliente/{idCliente}")
+    public String ver(Cliente cliente, Model model) {
+        cliente = clienteService.encontrarCliente(cliente);
+        model.addAttribute("cliente", cliente);
+        return "ver_cliente";
+    }
+    
     @GetMapping("/editar-cliente/{idCliente}")
     public String editar(Cliente cliente, Model model) {
         cliente = clienteService.encontrarCliente(cliente);
         model.addAttribute("cliente", cliente);
-        return "nuevo_cliente";
+        return "editar_cliente";
     }
 
     @GetMapping("/eliminar-cliente/{idCliente}")
@@ -52,4 +59,6 @@ public class ClienteController {
         clienteService.eliminar(cliente);
         return "redirect:/lista-clientes";
     }
+    
+     
 }
