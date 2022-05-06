@@ -6,6 +6,8 @@ import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -34,8 +36,10 @@ public class InmuebleController {
     @PostMapping("/guardar-inmueble")
     public String guardar(@Valid Inmueble inmueble, Errors errores) {
         if (errores.hasErrors()) {
+            System.out.println("(Error) Valor ascensor: " + inmueble.getAscensor());
             return "nuevo_inmueble";
         }
+        System.out.println("Valor ascensor: " + inmueble.getAscensor());
         inmuebleService.guardar(inmueble);
         return "redirect:/cartera-inmuebles";
     }

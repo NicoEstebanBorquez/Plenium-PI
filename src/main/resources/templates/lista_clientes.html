@@ -39,7 +39,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" th:href="@{/}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Panel de Control</span></a>
             </li>
@@ -196,7 +196,7 @@
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                <th>Ref.</th>
                                                 <th>Nombre completo</th>
                                                 <th>Teléfono</th>
                                                 <th>E-mail</th>
@@ -207,7 +207,7 @@
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>ID</th>
+                                                <th>Ref.</th>
                                                 <th>Nombre completo</th>
                                                 <th>Teléfono</th>
                                                 <th>E-mail</th>
@@ -224,14 +224,11 @@
                                                 </td>
                                                 <td th:text="${cliente.telefono}"></td>
                                                 <td th:text="${cliente.email}"></td>
-                                                <td> <a sec:authorize="hasRole('ROLE_ADMIN')"
-                                                        th:href="@{/ver-cliente/} + ${cliente.idCliente}"
+                                                <td> <a th:href="@{/ver-cliente/} + ${cliente.idCliente}"
                                                         th:text="Ver" /> </td>
-                                                <td> <a sec:authorize="hasRole('ROLE_ADMIN')"
-                                                        th:href="@{/editar-cliente/} + ${cliente.idCliente}"
+                                                <td> <a th:href="@{/editar-cliente/} + ${cliente.idCliente}"
                                                         th:text="Editar" /> </td>
-                                                <td> <a sec:authorize="hasRole('ROLE_ADMIN')"
-                                                        th:href="@{/eliminar-cliente/} +${cliente.idCliente}"
+                                                <td> <a th:href="@{/eliminar-cliente/} +${cliente.idCliente}"
                                                         th:text="Eliminar" /> </td>
                                             </tr>
                                         </tbody>

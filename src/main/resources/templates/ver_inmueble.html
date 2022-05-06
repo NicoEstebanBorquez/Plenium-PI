@@ -39,7 +39,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" th:href="@{/}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Panel de Control</span></a>
             </li>
@@ -185,9 +185,9 @@
                             <br>
                             <a th:href="@{/cartera-inmuebles}" th:text="Atrás" class="btn btn-secondary">Atrás</a>
                             <a th:href="@{/editar-inmueble/} + ${inmueble.idInmueble}" th:text="Editar"
-                                class="btn btn-secondary">Editar</a>
+                                class="btn btn-secondary">Editar inmueble</a>
                             <a th:href="@{/eliminar-inmueble/} + ${inmueble.idInmueble}" th:text="Eliminar"
-                                class="btn btn-secondary">Eliminar</a>
+                                class="btn btn-secondary">Eliminar inmueble</a>
                         </div>
                         <div class="card-body">
 
@@ -277,7 +277,16 @@
                                     <br />
 
                                     <label for="ascensor">Ascensor:</label>
-                                    <label th:text="*{ascensor}"></label>
+                                    
+                                    <div
+                                        th:if="${inmueble.ascensor != null}">
+                                        <input type="checkbox" name="ascensor" value="PepeSI" checked disabled>
+                                    </div>
+                                     <div
+                                        th:if="${inmueble.ascensor == null}">
+                                        <input type="checkbox" name="ascensor" value="PepeNO" disabled>
+                                    </div>
+                                    <!--<label th:text="*{ascensor}"></label>-->
                                     <br />
 
                                     <label for="piscina">Piscina:</label>

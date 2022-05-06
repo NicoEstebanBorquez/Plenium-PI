@@ -70,7 +70,7 @@ public class Inmueble implements Serializable {
 
     private Integer aparcamiento;
 
-    private Integer ascensor;
+    private String ascensor;
 
     private Integer piscina;
 
@@ -88,6 +88,8 @@ public class Inmueble implements Serializable {
     @NotEmpty
     @Email
     private String propietarioEmail;
+    
+    private String imagen;
 
     private Integer idUsuario;
 }

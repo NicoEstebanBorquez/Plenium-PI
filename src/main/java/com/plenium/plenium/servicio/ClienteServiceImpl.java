@@ -3,8 +3,6 @@ package com.plenium.plenium.servicio;
 import com.plenium.plenium.dao.ClienteDao;
 import com.plenium.plenium.domain.Cliente;
 import java.util.List;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

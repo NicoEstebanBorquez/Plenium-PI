@@ -4,6 +4,7 @@ import com.plenium.plenium.dao.UsuarioDao;
 import com.plenium.plenium.domain.Rol;
 import com.plenium.plenium.domain.Usuario;
 import java.util.ArrayList;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -40,4 +41,23 @@ public class UsuarioService implements UserDetailsService {
         return new User(usuario.getUsername(), usuario.getPassword(), roles);
     }
 
+    @Transactional(readOnly = true)
+    public List<Usuario> listarUsuarios() {
+        return (List<Usuario>) usuarioDao.findAll();
+    }
+
+    @Transactional
+    public void guardar(Usuario usuario) {
+        usuarioDao.save(usuario);
+    }
+
+    @Transactional
+    public void eliminar(Usuario usuario) {
+        usuarioDao.delete(usuario);
+    }
+
+    @Transactional(readOnly = true)
+    public Usuario encontrarUsuario(Usuario usuario) {
+        return usuarioDao.findById(usuario.getIdUsuario()).orElse(null);
+    }
 }

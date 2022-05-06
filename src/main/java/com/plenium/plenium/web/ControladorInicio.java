@@ -32,7 +32,7 @@ public class ControladorInicio {
         log.info("ejecutando el controlador Spring MVC");
         log.info("usuario que hizo login:" + user);
         model.addAttribute("personas", personas);
-        return "index";
+        return "panel_control";
     }
     
     @GetMapping("/agregar")

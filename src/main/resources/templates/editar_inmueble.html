@@ -39,7 +39,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" th:href="@{/}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Panel de Control</span></a>
             </li>
@@ -186,7 +186,7 @@
                             <a th:href="@{/cartera-inmuebles}" th:text="Atrás" class="btn btn-secondary">Atrás</a>
                         </div>
                         <div class="card-body">
-                            
+
                             <div class="table-responsive">
 
                                 <form th:action="@{/guardar-inmueble}" method="post" th:object="${inmueble}"
@@ -346,9 +346,11 @@
                                     <br />
 
 
-                                    <input type="submit" name="guardar" value="Guardar cambios" class="btn btn-success" />
-                                    <a th:href="@{/ver-inmueble/} + ${inmueble.idInmueble}" class="btn btn-secondary">Cancelar</a>
-                                
+                                    <input type="submit" name="guardar" value="Guardar cambios"
+                                        class="btn btn-success" />
+                                    <a th:href="@{/ver-inmueble/} + ${inmueble.idInmueble}"
+                                        class="btn btn-secondary">Cancelar</a>
+
                                 </form>
                             </div>
 

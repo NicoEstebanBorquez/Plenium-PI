@@ -26,7 +26,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul style="background-color: #0b2d4f;" ; class="navbar-nav  sidebar sidebar-dark accordion"
+        <ul style="background-color: #0b2d4f" ; class="navbar-nav  sidebar sidebar-dark accordion"
             id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
@@ -52,7 +52,7 @@
                 Inmuebles
             </div>
 
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" th:href="@{/cartera-inmuebles}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Cartera de Inmuebles</span></a>
@@ -75,7 +75,7 @@
             <div class="sidebar-heading">
                 Clientes
             </div>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" th:href="@{/lista-clientes}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Lista de Clientes</span></a>
@@ -124,30 +124,6 @@
 
             <!-- Divisor -->
             <hr class="sidebar-divider">
-
-            <!-- Titulo sección - Gestión de usuarios -->
-            <div class="sidebar-heading" sec:authorize="hasRole('ROLE_ADMIN')">
-                Gestión de Usuarios
-            </div>
-            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
-                <a class="nav-link" th:href="@{/lista-usuarios}">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Lista de Usuarios</span></a>
-            </li>
-            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
-                <a class="nav-link" th:href="@{/nuevo-usuario}">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Añadir nuevo Usuario</span></a>
-            </li>
-
-
-            <!-- Divisor -->
-            <hr class="sidebar-divider" sec:authorize="hasRole('ROLE_ADMIN')">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
         </ul>
         <!-- End of Sidebar -->
 
@@ -199,132 +175,134 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Cartera de Inmuebles</h1>
-
+                    <h1 class="h3 mb-2 text-gray-800">Lista de Usuarios</h1>
+                    <p class="mb-4">Descripción de la tabla.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Título secundario</h6>
                             <br>
-                            <a th:href="@{/nuevo-inmueble}" class="btn btn-success btn-icon-split btn-sm"><span
+                            <a th:href="@{/nuevo-cliente}" class="btn btn-success btn-icon-split btn-sm"><span
                                     class="icon text-white-50"> <i class="fas fa-edit"> </i></span><span
-                                    class="text">Añadir nuevo inmueble</span></a>
+                                    class="text">Añadir nuevo cliente</span></a>
                         </div>
                         <div class="card-body">
                             <!--TABLA-->
                             <div class="table-responsive"
-                                th:if="${listaInmueblesModel != null and !listaInmueblesModel.empty}">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Ref.</th>
-                                            <th>Imagen</th>
-                                            <th>Tipo</th>
-                                            <th>Denominación</th>
-                                            <th>Precio</th>
-                                            <th>m<sup>2</sup></th>
-                                            <th>Población</th>
-                                            <th>Provincia</th>
-                                            <th>Acción</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Ref.</th>
-                                            <th>Imagen</th>
-                                            <th>Tipo</th>
-                                            <th>Denominación</th>
-                                            <th>Precio</th>
-                                            <th>m<sup>2</sup></th>
-                                            <th>Población</th>
-                                            <th>Provincia</th>
-                                            <th>Acción</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr th:each="inmueble : ${listaInmueblesModel}">
-                                            <td th:text="${inmueble.idInmueble}"></td>
-                                            <td style="width: 150px;"> <img th:src="${inmueble.imagen}" style="width: 150px;"/> </td>
-                                            <td th:text="${inmueble.tipo}" style="text-transform:uppercase;"></td>
-                                            <td th:text="${inmueble.denominacion}" ></td>
-                                            <td th:text="${inmueble.precio} + €"></td>
-                                            <td th:text="${inmueble.superficieTotal}"></td>
-                                            <td th:text="${inmueble.poblacion}"></td>
-                                            <td th:text="${inmueble.provincia}"></td>
-                                            <td> <a th:href="@{/ver-inmueble/} + ${inmueble.idInmueble}"
-                                                    th:text="Ver" class="btn" style="background-color: #0b2d4f; color: rgba(255,255,255,.8);"/>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div th:if="${listaInmueblesModel == null or listaInmueblesModel.empty}">
-                                La lista de inmuebles está vacía.
+                                th:if="${listaUsuariosModel != null and !listaUsuariosModel.empty}">
+
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nombre completo</th>
+                                                <th>Teléfono</th>
+                                                <th>E-mail</th>
+                                                <th>Acciones 1</th>
+                                                <th>Acciones 2</th>
+                                                <th>Acciones 3</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nombre completo</th>
+                                                <th>Teléfono</th>
+                                                <th>E-mail</th>
+                                                <th>Acciones 1</th>
+                                                <th>Acciones 2</th>
+                                                <th>Acciones 3</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <tr th:each="usuario : ${listaUsuariosModel}">
+                                                <td th:text="${usuario.idUsuario}"></td>
+                                                <td
+                                                    th:text="${usuario.nombre} + ' ' + ${usuario.primerApellido} + ' ' + ${usuario.segundoApellido}">
+                                                </td>
+                                                <td th:text="${usuario.telefono}"></td>
+                                                <td th:text="${usuario.email}"></td>
+                                                <td> <a th:href="@{/ver-usuario/} + ${usuario.idUsuario}"
+                                                        th:text="Ver" /> </td>
+                                                <td> <a th:href="@{/editar-usuario/} + ${usuario.idUsuario}"
+                                                        th:text="Editar" /> </td>
+                                                <td> <a th:href="@{/eliminar-usuario/} +${usuario.idUsuario}"
+                                                        th:text="Eliminar" /> </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div th:if="${listaUsuariosModel == null or listaUsuariosModel.empty}">
+                                    La lista de usuarios está vacía.
+                                </div>
                             </div>
                         </div>
+
                     </div>
+                    <!-- /.container-fluid -->
 
                 </div>
-                <!-- /.container-fluid -->
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span><b>Autor:</b> Nicolás Esteban Bórquez</span>
+                            <br>
+                            <br>
+                            <span><b>Asignatura:</b> Proyecto Integrado - Instituto FOC</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span><b>Autor:</b> Nicolás Esteban Bórquez</span>
-                        <br>
-                        <br>
-                        <span><b>Asignatura:</b> Proyecto Integrado - Instituto FOC</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
+        <!-- End of Page Wrapper -->
 
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+        <!-- Page level plugins -->
+        <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+        <!-- Page level custom scripts -->
+        <script src="js/demo/datatables-demo.js"></script>
+
 </body>
 
 </html>
