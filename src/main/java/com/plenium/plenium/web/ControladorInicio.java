@@ -30,7 +30,7 @@ public class ControladorInicio {
     public String inicio(Model model, @AuthenticationPrincipal User user){
         var personas = personaService.listarPersonas();
         log.info("ejecutando el controlador Spring MVC");
-        log.info("usuario que hizo login:" + user);
+        log.info("usuario que hizo login:" + user.getUsername());
         model.addAttribute("personas", personas);
         return "panel_control";
     }

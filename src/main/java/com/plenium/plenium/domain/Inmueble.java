@@ -19,7 +19,7 @@ public class Inmueble implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idInmueble;
-    
+
     private Date fechaPublicacion;
 
     @NotEmpty
@@ -50,29 +50,29 @@ public class Inmueble implements Serializable {
     //@NotNull
     private Integer banos;
 
-    private Integer amueblado;
+    private String amueblado;
 
-    private Integer semiAmueblado;
+    private String cocinaEquipada;
 
-    private Integer noAmueblado;
+    private String aireAcondicionado;
 
-    private Integer cocinaEquipada;
+    private String calefaccionCentral;
 
-    private Integer aireAcondicionado;
+    private String gasNatural;
 
-    private Integer calefaccionCentral;
+    private String placasSolares;
 
-    private Integer gasNatural;
+    private String armariosEmpotrados;
 
-    private Integer placasSolares;
+    private String terraza;
 
-    private Integer armariosEmpotrados;
+    private String jardin;
 
-    private Integer aparcamiento;
+    private String aparcamiento;
 
     private String ascensor;
 
-    private Integer piscina;
+    private String piscina;
 
     @NotEmpty
     private String propietarioNombre;
@@ -88,7 +88,7 @@ public class Inmueble implements Serializable {
     @NotEmpty
     @Email
     private String propietarioEmail;
-    
+
     private String imagen;
 
     private Integer idUsuario;

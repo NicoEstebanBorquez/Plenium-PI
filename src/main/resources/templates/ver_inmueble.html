@@ -176,12 +176,10 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Ver Inmueble</h1>
-                    <p class="mb-4">Descripción de la tabla.</p>
-
+FECHA PUBLICACION Y USUARIO
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Título secundario</h6>
                             <br>
                             <a th:href="@{/cartera-inmuebles}" th:text="Atrás" class="btn btn-secondary">Atrás</a>
                             <a th:href="@{/editar-inmueble/} + ${inmueble.idInmueble}" th:text="Editar"
@@ -190,137 +188,200 @@
                                 class="btn btn-secondary">Eliminar inmueble</a>
                         </div>
                         <div class="card-body">
-
-                            <div class="table-responsive">
-
+                            <div class="table">
                                 <form th:object="${inmueble}" class="user">
                                     <input type="hidden" name="idInmueble" th:field="*{idInmueble}" />
 
-                                    <label for="denominacion">Denominacion:</label>
-                                    <label th:text="*{denominacion}"></label>
-                                    <br />
-
-                                    <label for="tipo">Tipo:</label>
-                                    <label th:text="*{tipo}"></label>
-                                    <br />
-
-                                    <label for="precio">Precio:</label>
-                                    <label th:text="*{precio}"></label>
-                                    <br />
-
-                                    <label for="superficieUtil">Superficie útil:</label>
-                                    <label th:text="*{superficieUtil}"></label>
-                                    <br />
-
-                                    <label for="superficieTotal">Superficie total:</label>
-                                    <label th:text="*{superficieTotal}"></label>
-                                    <br />
-
-                                    <label for="direccion">Dirección:</label>
-                                    <label th:text="*{direccion}"></label>
-                                    <br />
-
-                                    <label for="poblacion">Población:</label>
-                                    <label th:text="*{poblacion}"></label>
-                                    <br />
-
-                                    <label for="provincia">Provincia:</label>
-                                    <label th:text="*{provincia}"></label>
-                                    <br />
-
-                                    <label for="dormitorios">Dormitorios:</label>
-                                    <label th:text="*{dormitorios}"></label>
-                                    <br />
-
-                                    <label for="banos">Baños:</label>
-                                    <label th:text="*{banos}"></label>
-                                    <br />
-
-                                    <label for="amueblado">Amueblado:</label>
-                                    <label th:text="*{amueblado}"></label>
-                                    <br />
-
-                                    <label for="semiAmueblado">Semi-amueblado:</label>
-                                    <label th:text="*{semiAmueblado}"></label>
-                                    <br />
-
-                                    <label for="noAmueblado">No amueblado:</label>
-                                    <label th:text="*{noAmueblado}"></label>
-                                    <br />
-
-                                    <label for="cocinaEquipada">Cocina equipada:</label>
-                                    <label th:text="*{cocinaEquipada}"></label>
-                                    <br />
-
-                                    <label for="aireAcondicionado">Aire acondicionado:</label>
-                                    <label th:text="*{aireAcondicionado}"></label>
-                                    <br />
-
-                                    <label for="calefaccionCentral">Calefaccion central:</label>
-                                    <label th:text="*{calefaccionCentral}"></label>
-                                    <br />
-
-                                    <label for="gasNatural">Gas natural:</label>
-                                    <label th:text="*{gasNatural}"></label>
-                                    <br />
-
-                                    <label for="placasSolares">Placas solares:</label>
-                                    <label th:text="*{placasSolares}"></label>
-                                    <br />
-
-                                    <label for="armariosEmpotrados">Armarios empotrados:</label>
-                                    <label th:text="*{armariosEmpotrados}"></label>
-                                    <br />
-
-                                    <label for="aparcamiento">Aparcamiento:</label>
-                                    <label th:text="*{aparcamiento}"></label>
-                                    <br />
-
-                                    <label for="ascensor">Ascensor:</label>
-                                    
-                                    <div
-                                        th:if="${inmueble.ascensor != null}">
-                                        <input type="checkbox" name="ascensor" value="PepeSI" checked disabled>
+                                    <h6 class="font-weight-bold"><u>Información general:</u></h6>
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="denominacion" class="font-weight-bold">Denominacion:</label>
+                                            <label th:text="*{denominacion}"></label>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="precio" class="font-weight-bold">Precio:</label>
+                                            <label th:text="*{precio} + €"></label>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="tipo" class="font-weight-bold">Tipo:</label>
+                                            <label th:text="*{tipo}"></label>
+                                        </div>
                                     </div>
-                                     <div
-                                        th:if="${inmueble.ascensor == null}">
-                                        <input type="checkbox" name="ascensor" value="PepeNO" disabled>
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-3">
+                                            <label for="dormitorios" class="font-weight-bold">Dormitorios:</label>
+                                            <label th:text="*{dormitorios}"></label>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label for="banos" class="font-weight-bold">Baños:</label>
+                                            <label th:text="*{banos}"></label>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label for="superficieUtil" class="font-weight-bold">Superficie útil:</label>
+                                            <label th:text="*{superficieUtil} + m"></label><sup>2</sup>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="superficieTotal" class="font-weight-bold">Superficie total:</label>
+                                            <label th:text="*{superficieTotal} + m"></label><sup>2</sup>
+                                        </div>
                                     </div>
-                                    <!--<label th:text="*{ascensor}"></label>-->
-                                    <br />
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="direccion" class="font-weight-bold">Dirección:</label>
+                                            <label th:text="*{direccion}"></label>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="poblacion" class="font-weight-bold">Población:</label>
+                                            <label th:text="*{poblacion}"></label>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="provincia" class="font-weight-bold">Provincia:</label>
+                                            <label th:text="*{provincia}"></label>
+                                        </div>
+                                    </div>
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <hr>
+                                    <h6 class="font-weight-bold"><u>Otras características:</u></h6>
 
-                                    <label for="piscina">Piscina:</label>
-                                    <label th:text="*{piscina}"></label>
-                                    <br />
+                                    <div class="form-row">
+                                        <div class="form-group col-md-3">
+                                            <label for="amueblado" class="font-weight-bold">Amueblado:</label>
+                                            <input th:if="${inmueble.amueblado != null}" type="checkbox" name="amueblado"
+                                                checked disabled>
+                                            <input th:if="${inmueble.amueblado == null}" type="checkbox" name="amueblado"
+                                                disabled>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="cocinaEquipada" class="font-weight-bold">Cocina equipada:</label>
+                                            <input th:if="${inmueble.cocinaEquipada != null}" type="checkbox" name="cocinaEquipada"
+                                                checked disabled>
+                                            <input th:if="${inmueble.cocinaEquipada == null}" type="checkbox" name="cocinaEquipada"
+                                                disabled>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="armariosEmpotrados" class="font-weight-bold">Armarios empotrados:</label>
+                                            <input th:if="${inmueble.armariosEmpotrados != null}" type="checkbox" name="armariosEmpotrados"
+                                                checked disabled>
+                                            <input th:if="${inmueble.armariosEmpotrados == null}" type="checkbox" name="armariosEmpotrados"
+                                                disabled>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="gasNatural" class="font-weight-bold">Gas natural:</label>
+                                            <input th:if="${inmueble.gasNatural != null}" type="checkbox" name="gasNatural"
+                                                checked disabled>
+                                            <input th:if="${inmueble.gasNatural == null}" type="checkbox" name="gasNatural"
+                                                disabled>
+                                        </div>
+                                    </div>
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-3">
+                                            <label for="aireAcondicionado" class="font-weight-bold">Aire acondicionado:</label>
+                                            <input th:if="${inmueble.aireAcondicionado != null}" type="checkbox" name="aireAcondicionado"
+                                                checked disabled>
+                                            <input th:if="${inmueble.aireAcondicionado == null}" type="checkbox" name="aireAcondicionado"
+                                                disabled>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="calefaccionCentral" class="font-weight-bold">Calefaccion central:</label>
+                                            <input th:if="${inmueble.calefaccionCentral != null}" type="checkbox" name="calefaccionCentral"
+                                                checked disabled>
+                                            <input th:if="${inmueble.calefaccionCentral == null}" type="checkbox" name="calefaccionCentral"
+                                                disabled>
+                                        </div>
 
-                                    <label for="fechaPublicacion">Fecha publicación:</label>
+                                        <div class="form-group col-md-3">
+                                            <label for="placasSolares" class="font-weight-bold">Placas solares:</label>
+                                            <input th:if="${inmueble.placasSolares != null}" type="checkbox" name="placasSolares"
+                                                checked disabled>
+                                            <input th:if="${inmueble.placasSolares == null}" type="checkbox" name="placasSolares"
+                                                disabled>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="terraza" class="font-weight-bold">Terraza/Balcón:</label>
+                                            <input th:if="${inmueble.terraza != null}" type="checkbox" name="terraza"
+                                                checked disabled>
+                                            <input th:if="${inmueble.terraza == null}" type="checkbox" name="terraza"
+                                                disabled>
+                                        </div>
+                                    </div>
+
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-3">
+                                            <label for="aparcamiento" class="font-weight-bold">Aparcamiento:</label>
+                                            <input th:if="${inmueble.aparcamiento != null}" type="checkbox" name="aparcamiento"
+                                                checked disabled>
+                                            <input th:if="${inmueble.aparcamiento == null}" type="checkbox" name="aparcamiento"
+                                                disabled>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="ascensor" class="font-weight-bold">Ascensor:</label>
+                                            <input th:if="${inmueble.ascensor != null}" type="checkbox" name="ascensor"
+                                                checked disabled>
+                                            <input th:if="${inmueble.ascensor == null}" type="checkbox" name="ascensor"
+                                                disabled>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="piscina" class="font-weight-bold">Piscina:</label>
+                                            <input th:if="${inmueble.piscina != null}" type="checkbox" name="piscina"
+                                                checked disabled>
+                                            <input th:if="${inmueble.piscina == null}" type="checkbox" name="piscina"
+                                                disabled>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="jardin" class="font-weight-bold">Jardín:</label>
+                                            <input th:if="${inmueble.jardin != null}" type="checkbox" name="jardin"
+                                                checked disabled>
+                                            <input th:if="${inmueble.jardin == null}" type="checkbox" name="jardin"
+                                                disabled>
+                                        </div>
+                                    </div>
+
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <hr>
+                                    <h6 class="font-weight-bold"><u>Información del propietario/a:</u></h6>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="propietarioNombre" class="font-weight-bold">Nombre propietario:</label>
+                                            <label th:text="*{propietarioNombre}"></label>
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <label for="propietarioApellidos" class="font-weight-bold">Apellidos:</label>
+                                            <label th:text="*{propietarioApellidos}"></label>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="propietarioNif" class="font-weight-bold">Documento de Identidad:</label>
+                                            <label th:text="*{propietarioNif}"></label>
+                                        </div>
+                                    </div>
+
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-8">
+                                            <label for="propietarioEmail" class="font-weight-bold">Correo electrónico:</label>
+                                            <label th:text="*{propietarioEmail}"></label>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="propietarioTelefono" class="font-weight-bold">Teléfono:</label>
+                                            <label th:text="*{propietarioTelefono}"></label>
+                                        </div>
+                                    </div>
+
+                                    <label for="fechaPublicacion" class="font-weight-bold">Fecha publicación:</label>
                                     <label th:text="*{fechaPublicacion}"></label>
-                                    <br />
 
-                                    <label for="propietarioNombre">Nombre propietario:</label>
-                                    <label th:text="*{propietarioNombre}"></label>
-                                    <br />
-
-                                    <label for="propietarioApellidos">Apellidos:</label>
-                                    <label th:text="*{propietarioApellidos}"></label>
-                                    <br />
-
-                                    <label for="propietarioNif">NIF:</label>
-                                    <label th:text="*{propietarioNif}"></label>
-                                    <br />
-
-                                    <label for="propietarioTelefono">Teléfono:</label>
-                                    <label th:text="*{propietarioTelefono}"></label>
-                                    <br />
-
-                                    <label for="propietarioEmail">Correo electrónico:</label>
-                                    <label th:text="*{propietarioEmail}"></label>
-                                    <br />
-
-                                    <label for="idUsuario">Usuario:</label>
+                                    <label for="idUsuario" class="font-weight-bold">Usuario:</label>
                                     <label th:text="*{idUsuario}"></label>
-                                    <br />
 
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <hr>
                                 </form>
                             </div>
 
@@ -373,22 +434,22 @@
         </div>
     </div>
 
-<!-- Bootstrap core JavaScript-->
-<script src="../vendor/jquery/jquery.min.js"></script>
-<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
-<!-- Custom scripts for all pages-->
-<script src="../js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="../js/sb-admin-2.min.js"></script>
 
-<!-- Page level plugins -->
-<script src="../vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-<!-- Page level custom scripts -->
-<script src="../js/demo/datatables-demo.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="../js/demo/datatables-demo.js"></script>
 
 </body>
 

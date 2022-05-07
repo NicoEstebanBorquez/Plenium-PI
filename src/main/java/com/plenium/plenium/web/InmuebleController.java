@@ -1,7 +1,9 @@
 package com.plenium.plenium.web;
 
 import com.plenium.plenium.domain.Inmueble;
+import com.plenium.plenium.domain.Usuario;
 import com.plenium.plenium.servicio.InmuebleService;
+import com.plenium.plenium.servicio.UsuarioService;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,6 +22,8 @@ public class InmuebleController {
 
     @Autowired
     private InmuebleService inmuebleService;
+     @Autowired
+    private UsuarioService usuarioService;
 
     @GetMapping("/cartera-inmuebles")
     public String inicio(Model model) {
@@ -34,19 +38,42 @@ public class InmuebleController {
     }
 
     @PostMapping("/guardar-inmueble")
-    public String guardar(@Valid Inmueble inmueble, Errors errores) {
+    public String guardar(@Valid Inmueble inmueble, Errors errores, @AuthenticationPrincipal User user) {
         if (errores.hasErrors()) {
-            System.out.println("(Error) Valor ascensor: " + inmueble.getAscensor());
             return "nuevo_inmueble";
         }
-        System.out.println("Valor ascensor: " + inmueble.getAscensor());
+
+        //Fecha actual:
+        java.util.Date utilDate = new java.util.Date();
+        java.sql.Date fechaActual = new java.sql.Date(utilDate.getTime());
+        inmueble.setFechaPublicacion(fechaActual);
+
+        //Usuario que realiza la acción:
         inmuebleService.guardar(inmueble);
         return "redirect:/cartera-inmuebles";
     }
 
     @GetMapping("/ver-inmueble/{idInmueble}")
-    public String ver(Inmueble inmueble, Model model) {
+    public String ver(Inmueble inmueble, Model model, @AuthenticationPrincipal User user) {
         inmueble = inmuebleService.encontrarInmueble(inmueble);
+        /*
+        *
+        **
+        **
+        **
+        **
+        **
+        **
+        **
+        *
+        
+        
+        */
+        Usuario usuario = usuarioService.encontrarUsuarioPorUsername(user.getUsername());
+
+        System.out.println("finbyusername (email): " + usuario.getEmail());
+                System.out.println("finbyusername (telefono): " + usuario.getTelefono());
+
         model.addAttribute("inmueble", inmueble);
         return "ver_inmueble";
     }
