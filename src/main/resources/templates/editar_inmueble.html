@@ -176,184 +176,237 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Editar Inmueble</h1>
-                    <p class="mb-4">Descripción de la tabla.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Título secundario</h6>
                             <br>
-                            <a th:href="@{/cartera-inmuebles}" th:text="Atrás" class="btn btn-secondary">Atrás</a>
+                            <a th:href="@{/cartera-inmuebles}" class="btn btn-secondary btn-icon-split btn-sm"><span
+                                    class="icon text-white-50"> <i class="fas fa-reply"> </i></span><span
+                                    class="text">Atrás</span></a>
                         </div>
                         <div class="card-body">
-
-                            <div class="table-responsive">
-
+                            <div class="table">
                                 <form th:action="@{/guardar-inmueble}" method="post" th:object="${inmueble}"
                                     class="user">
                                     <input type="hidden" name="idInmueble" th:field="*{idInmueble}" />
 
+                                    <h6 class="font-weight-bold"><u>Información general:</u></h6>
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="denominacion">Denominacion <span
+                                                    style="color:red">*</span></label>
+                                            <input type="text" name="denominacion" th:field="*{denominacion}"
+                                                class="form-control" />
+                                            <span style="color:red;" th:if="${#fields.hasErrors('denominacion')}"
+                                                th:errors="*{denominacion}">Error
+                                                denominación</span>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="precio">Precio <span style="color:red">*</span></label>
+                                            <input type="number" min="0" name="precio" th:field="*{precio}"
+                                                class="form-control" />
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="tipo">Tipo <span style="color:red">*</span></label>
+                                            <!-- <input type="text" name="tipo" th:field="*{tipo}" class="form-control" />-->
 
-                                    <label for="denominacion">Denominacion:</label>
-                                    <input type="text" name="denominacion" th:field="*{denominacion}"
-                                        class="form-control form-control-user" />
-                                    <span th:if="${#fields.hasErrors('denominacion')}" th:errors="*{denominacion}">Error
-                                        denominación</span>
-                                    <br />
+                                            <select th:field="*{tipo}" class="form-control">
+                                                <option th:value="'---'" th:text="---"></option>
+                                                <option th:value="'PISO'" th:text="PISO"></option>
+                                                <option th:value="'ÁTICO'" th:text="ÁTICO"></option>
+                                                <option th:value="'CASA-CHALET'" th:text="CASA-CHALET"></option>
+                                                <option th:value="'GARAJE'" th:text="GARAJE"></option>
+                                                <option th:value="'LOCAL'" th:text="LOCAL"></option>
+                                                <option th:value="'OFICINA'" th:text="OFICINA"></option>
+                                                <option th:value="'TERRENO'" th:text="TERRENO"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-3">
+                                            <label for="dormitorios">Dormitorios <span
+                                                    style="color:red">*</span></label>
+                                            <input type="number" min="0" name="dormitorios" th:field="*{dormitorios}"
+                                                class="form-control " />
+                                        </div>
 
-                                    <label for="tipo">Tipo:</label>
-                                    <input type="text" name="tipo" th:field="*{tipo}"
-                                        class="form-control form-control-user" />
-                                    <br />
+                                        <div class="form-group col-md-3">
+                                            <label for="banos">Baños <span style="color:red">*</span></label>
+                                            <input type="number" min="0" name="banos" th:field="*{banos}"
+                                                class="form-control " />
+                                        </div>
 
-                                    <label for="precio">Precio:</label>
-                                    <input type="number" name="precio" th:field="*{precio}"
-                                        class="form-control form-control-user" />
-                                    <br />
+                                        <div class="form-group col-md-3">
+                                            <label for="superficieUtil">Superficie útil</label>
+                                            <input type="number" min="0" name="superficieUtil"
+                                                th:field="*{superficieUtil}" class="form-control" />
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="superficieTotal">Superficie total</label>
+                                            <input type="number" min="0" name="superficieTotal"
+                                                th:field="*{superficieTotal}" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="direccion">Dirección <span style="color:red">*</span></label>
+                                            <input type="text" name="direccion" th:field="*{direccion}"
+                                                class="form-control " />
+                                            <span style="color:red;" th:if="${#fields.hasErrors('direccion')}"
+                                                th:errors="*{direccion}">Error
+                                                dirección</span>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="poblacion">Población <span style="color:red">*</span></label>
+                                            <input type="text" name="poblacion" th:field="*{poblacion}"
+                                                class="form-control " />
+                                            <span style="color:red;" th:if="${#fields.hasErrors('poblacion')}"
+                                                th:errors="*{poblacion}">Error
+                                                poblacion</span>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="provincia">Provincia <span style="color:red">*</span></label>
+                                            <input type="text" name="provincia" th:field="*{provincia}"
+                                                class="form-control " />
+                                            <span style="color:red;" th:if="${#fields.hasErrors('provincia')}"
+                                                th:errors="*{provincia}">Error
+                                                provincia</span>
+                                        </div>
+                                    </div>
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <hr>
+                                    <h6 class="font-weight-bold"><u>Otras características:</u></h6>
 
-                                    <label for="superficieUtil">Superficie útil:</label>
-                                    <input type="number" name="superficieUtil" th:field="*{superficieUtil}"
-                                        class="form-control form-control-user" />
-                                    <br />
+                                    <div class="form-row">
+                                        <div class="form-group col-md-3">
+                                            <label for="amueblado">Amueblado:</label>
+                                            <input type="checkbox" th:field="*{amueblado}" th:value="si">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="cocinaEquipada">Cocina equipada:</label>
+                                            <input type="checkbox" th:field="*{cocinaEquipada}" th:value="si">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="armariosEmpotrados">Armarios empotrados:</label>
+                                            <input type="checkbox" th:field="*{armariosEmpotrados}" th:value="si">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="gasNatural">Gas natural:</label>
+                                            <input type="checkbox" th:field="*{gasNatural}" th:value="si">
+                                        </div>
+                                    </div>
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-3">
+                                            <label for="aireAcondicionado">Aire acondicionado:</label>
+                                            <input type="checkbox" th:field="*{aireAcondicionado}" th:value="si">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="calefaccionCentral">Calefaccion central:</label>
+                                            <input type="checkbox" th:field="*{calefaccionCentral}" th:value="si">
+                                        </div>
 
-                                    <label for="superficieTotal">Superficie total:</label>
-                                    <input type="number" name="superficieTotal" th:field="*{superficieTotal}"
-                                        class="form-control form-control-user" />
-                                    <br />
+                                        <div class="form-group col-md-3">
+                                            <label for="placasSolares">Placas solares:</label>
+                                            <input type="checkbox" th:field="*{placasSolares}" th:value="si">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="terraza">Terraza/Balcón:</label>
+                                            <input type="checkbox" th:field="*{terraza}" th:value="si">
+                                        </div>
+                                    </div>
 
-                                    <label for="direccion">Dirección:</label>
-                                    <input type="text" name="direccion" th:field="*{direccion}"
-                                        class="form-control form-control-user" />
-                                    <br />
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-3">
+                                            <label for="aparcamiento">Aparcamiento:</label>
+                                            <input type="checkbox" th:field="*{aparcamiento}" th:value="si">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="ascensor">Ascensor:</label>
+                                            <input type="checkbox" th:field="*{ascensor}" th:value="si">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="piscina">Piscina:</label>
+                                            <input type="checkbox" th:field="*{piscina}" th:value="si">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="jardin">Jardín</label>
+                                            <input type="checkbox" th:field="*{jardin}" th:value="si">
+                                        </div>
+                                    </div>
 
-                                    <label for="poblacion">Población:</label>
-                                    <input type="text" name="poblacion" th:field="*{poblacion}"
-                                        class="form-control form-control-user" />
-                                    <span th:if="${#fields.hasErrors('poblacion')}" th:errors="*{poblacion}">Error
-                                        poblacion</span>
-                                    <br />
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <hr>
+                                    <h6 class="font-weight-bold"><u>Información del propietario/a:</u></h6>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="propietarioNombre">Nombre propietario <span
+                                                    style="color:red">*</span></label>
+                                            <input type="text" name="propietarioNombre" th:field="*{propietarioNombre}"
+                                                class="form-control " />
+                                            <span style="color:red;" th:if="${#fields.hasErrors('propietarioNombre')}"
+                                                th:errors="*{propietarioNombre}">Error
+                                                nombre propietario</span>
+                                        </div>
 
-                                    <label for="provincia">Provincia:</label>
-                                    <input type="text" name="provincia" th:field="*{provincia}"
-                                        class="form-control form-control-user" />
-                                    <span th:if="${#fields.hasErrors('provincia')}" th:errors="*{provincia}">Error
-                                        provincia</span>
-                                    <br />
+                                        <div class="form-group col-md-5">
+                                            <label for="propietarioApellidos">Apellidos <span
+                                                    style="color:red">*</span></label>
+                                            <input type="text" name="propietarioApellidos"
+                                                th:field="*{propietarioApellidos}" class="form-control " />
+                                            <span style="color:red;"
+                                                th:if="${#fields.hasErrors('propietarioApellidos')}"
+                                                th:errors="*{propietarioApellidos}">Error
+                                                apellido propietario</span>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="propietarioNif">Documento de Identidad</label>
+                                            <input type="text" name="propietarioNif" th:field="*{propietarioNif}"
+                                                class="form-control " />
+                                        </div>
+                                    </div>
 
-                                    <label for="dormitorios">Dormitorios:</label>
-                                    <input type="number" name="dormitorios" th:field="*{dormitorios}"
-                                        class="form-control form-control-user" />
-                                    <br />
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-8">
+                                            <label for="propietarioEmail">Correo electrónico <span
+                                                    style="color:red">*</span></label>
+                                            <input type="text" name="propietarioEmail" th:field="*{propietarioEmail}"
+                                                class="form-control " />
+                                            <span style="color:red;" th:if="${#fields.hasErrors('propietarioEmail')}"
+                                                th:errors="*{propietarioEmail}">Error
+                                                email propietario</span>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="propietarioTelefono">Teléfono <span
+                                                    style="color:red">*</span></label>
+                                            <input type="text" name="propietarioTelefono"
+                                                th:field="*{propietarioTelefono}" class="form-control " />
+                                            <span style="color:red;" th:if="${#fields.hasErrors('propietarioTelefono')}"
+                                                th:errors="*{propietarioTelefono}">Error
+                                                teléfono propietario</span>
+                                        </div>
+                                    </div>
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <hr>
 
-                                    <label for="banos">Baños:</label>
-                                    <input type="number" name="banos" th:field="*{banos}"
-                                        class="form-control form-control-user" />
-                                    <br />
+                                    <button name="guardar" class="btn btn-success btn-icon-split btn-sm"><span
+                                            class="icon text-white-50">
+                                            <i class="fas fa-save"> </i></span><span
+                                            class="text">Guardar</span></button>
 
-                                    <label for="amueblado">Amueblado:</label>
-                                    <input type="number" name="amueblado" th:field="*{amueblado}"
-                                        class="form-control form-control-user" />
-                                    <br />
-
-                                    <label for="semiAmueblado">Semi-amueblado:</label>
-                                    <input type="number" name="semiAmueblado" th:field="*{semiAmueblado}"
-                                        class="form-control form-control-user" />
-                                    <br />
-
-                                    <label for="noAmueblado">No amueblado:</label>
-                                    <input type="number" name="noAmueblado" th:field="*{noAmueblado}"
-                                        class="form-control form-control-user" />
-                                    <br />
-
-                                    <label for="cocinaEquipada">Cocina equipada:</label>
-                                    <input type="number" name="cocinaEquipada" th:field="*{cocinaEquipada}"
-                                        class="form-control form-control-user" />
-                                    <br />
-
-                                    <label for="aireAcondicionado">Aire acondicionado:</label>
-                                    <input type="number" name="aireAcondicionado" th:field="*{aireAcondicionado}"
-                                        class="form-control form-control-user" />
-                                    <br />
-
-                                    <label for="calefaccionCentral">Calefaccion central:</label>
-                                    <input type="number" name="calefaccionCentral" th:field="*{calefaccionCentral}"
-                                        class="form-control form-control-user" />
-                                    <br />
-
-                                    <label for="gasNatural">Gas natural:</label>
-                                    <input type="number" name="gasNatural" th:field="*{gasNatural}"
-                                        class="form-control form-control-user" />
-                                    <br />
-
-                                    <label for="placasSolares">Placas solares:</label>
-                                    <input type="number" name="placasSolares" th:field="*{placasSolares}"
-                                        class="form-control form-control-user" />
-                                    <br />
-
-                                    <label for="armariosEmpotrados">Armarios empotrados:</label>
-                                    <input type="number" name="armariosEmpotrados" th:field="*{armariosEmpotrados}"
-                                        class="form-control form-control-user" />
-                                    <br />
-
-                                    <label for="aparcamiento">Aparcamiento:</label>
-                                    <input type="number" name="aparcamiento" th:field="*{aparcamiento}"
-                                        class="form-control form-control-user" />
-                                    <br />
-
-                                    <label for="ascensor">Ascensor:</label>
-                                    <input type="number" name="ascensor" th:field="*{ascensor}"
-                                        class="form-control form-control-user" />
-                                    <br />
-
-                                    <label for="piscina">Piscina:</label>
-                                    <input type="number" name="piscina" th:field="*{piscina}"
-                                        class="form-control form-control-user" />
-                                    <br />
-
-                                    <label for="fechaPublicacion">Fecha publicación:</label>
-                                    <input type="date" min="2022-01-01" max="2023-12-31" name="fechaPublicacion"
-                                        th:field="*{fechaPublicacion}" class="form-control form-control-user" />
-                                    <br />
-
-                                    <label for="propietarioNombre">Nombre propietario:</label>
-                                    <input type="text" name="propietarioNombre" th:field="*{propietarioNombre}"
-                                        class="form-control form-control-user" />
-                                    <br />
-
-                                    <label for="propietarioApellidos">Apellidos:</label>
-                                    <input type="text" name="propietarioApellidos" th:field="*{propietarioApellidos}"
-                                        class="form-control form-control-user" />
-                                    <br />
-
-                                    <label for="propietarioNif">NIF:</label>
-                                    <input type="text" name="propietarioNif" th:field="*{propietarioNif}"
-                                        class="form-control form-control-user" />
-                                    <br />
-
-                                    <label for="propietarioTelefono">Teléfono:</label>
-                                    <input type="text" name="propietarioTelefono" th:field="*{propietarioTelefono}"
-                                        class="form-control form-control-user" />
-                                    <br />
-
-                                    <label for="propietarioEmail">Correo electrónico:</label>
-                                    <input type="text" name="propietarioEmail" th:field="*{propietarioEmail}"
-                                        class="form-control form-control-user" />
-                                    <br />
-
-                                    <label for="idUsuario">Usuario:</label>
-                                    <input type="number" name="idUsuario" th:field="*{idUsuario}"
-                                        class="form-control form-control-user" />
-                                    <br />
-
-
-                                    <input type="submit" name="guardar" value="Guardar cambios"
-                                        class="btn btn-success" />
-                                    <a th:href="@{/ver-inmueble/} + ${inmueble.idInmueble}"
-                                        class="btn btn-secondary">Cancelar</a>
-
+                                    <a th:href="@{/cartera-inmuebles}"
+                                        class="btn btn-secondary btn-icon-split btn-sm"><span
+                                            class="icon text-white-50">
+                                            <i class="fas fa-window-close"> </i></span><span
+                                            class="text">Cancelar</span></a>
                                 </form>
                             </div>
-
                         </div>
                     </div>
 

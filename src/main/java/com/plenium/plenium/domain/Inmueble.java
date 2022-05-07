@@ -91,5 +91,5 @@ public class Inmueble implements Serializable {
 
     private String imagen;
 
-    private Integer idUsuario;
+    private Long idUsuario;
 }

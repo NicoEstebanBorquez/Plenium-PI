@@ -180,7 +180,10 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <a th:href="@{/cartera-inmuebles}" th:text="Atrás" class="btn btn-secondary">Atrás</a>
+                            <br>
+                            <a th:href="@{/cartera-inmuebles}" class="btn btn-secondary btn-icon-split btn-sm"><span
+                                    class="icon text-white-50"> <i class="fas fa-reply"> </i></span><span
+                                    class="text">Atrás</span></a>
                         </div>
                         <div class="card-body">
                             <div class="table">
@@ -203,13 +206,11 @@
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="precio">Precio <span style="color:red">*</span></label>
-                                            <input type="number" name="precio" th:field="*{precio}"
+                                            <input type="number" min="0" name="precio" th:field="*{precio}"
                                                 class="form-control" />
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="tipo">Tipo <span style="color:red">*</span></label>
-                                           <!-- <input type="text" name="tipo" th:field="*{tipo}" class="form-control" />-->
-                  
                                             <select th:field="*{tipo}" class="form-control">
                                                 <option th:value="'---'" th:text="---"></option>
                                                 <option th:value="'PISO'" th:text="PISO"></option>
@@ -227,25 +228,25 @@
                                         <div class="form-group col-md-3">
                                             <label for="dormitorios">Dormitorios <span
                                                     style="color:red">*</span></label>
-                                            <input type="number" name="dormitorios" th:field="*{dormitorios}"
+                                            <input type="number" min="0" name="dormitorios" th:field="*{dormitorios}"
                                                 class="form-control " />
                                         </div>
 
                                         <div class="form-group col-md-3">
                                             <label for="banos">Baños <span style="color:red">*</span></label>
-                                            <input type="number" name="banos" th:field="*{banos}"
+                                            <input type="number" min="0" name="banos" th:field="*{banos}"
                                                 class="form-control " />
                                         </div>
 
                                         <div class="form-group col-md-3">
                                             <label for="superficieUtil">Superficie útil</label>
-                                            <input type="number" name="superficieUtil" th:field="*{superficieUtil}"
-                                                class="form-control" />
+                                            <input type="number" min="0" name="superficieUtil"
+                                                th:field="*{superficieUtil}" class="form-control" />
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="superficieTotal">Superficie total</label>
-                                            <input type="number" name="superficieTotal" th:field="*{superficieTotal}"
-                                                class="form-control" />
+                                            <input type="number" min="0" name="superficieTotal"
+                                                th:field="*{superficieTotal}" class="form-control" />
                                         </div>
                                     </div>
                                     <!-- ----------------------- ROW ----------------------- -->
@@ -390,23 +391,19 @@
                                                 teléfono propietario</span>
                                         </div>
                                     </div>
-
-                                    <!--<label for="fechaPublicacion">Fecha publicación:</label>
-                                    <input type="date" min="2022-01-01" max="2023-12-31" name="fechaPublicacion"
-                                        th:field="*{fechaPublicacion}" class="form-control " />-->
-
-
-
-                                    <label for="idUsuario">Usuario:</label>
-                                    <input type="number" name="idUsuario" th:field="*{idUsuario}"
-                                        class="form-control " />
-
                                     <!-- ----------------------- ROW ----------------------- -->
                                     <hr>
 
-                                    <input type="submit" name="guardar" value="Guardar" class="btn btn-success" />
-                                    <a th:href="@{/cartera-inmuebles}" class="btn btn-secondary">Cancelar</a>
+                                    <button name="guardar" class="btn btn-success btn-icon-split btn-sm"><span
+                                            class="icon text-white-50">
+                                            <i class="fas fa-save"> </i></span><span
+                                            class="text">Guardar</span></button>
 
+                                    <a th:href="@{/cartera-inmuebles}"
+                                        class="btn btn-secondary btn-icon-split btn-sm"><span
+                                            class="icon text-white-50">
+                                            <i class="fas fa-window-close"> </i></span><span
+                                            class="text">Cancelar</span></a>
                                 </form>
                             </div>
                         </div>

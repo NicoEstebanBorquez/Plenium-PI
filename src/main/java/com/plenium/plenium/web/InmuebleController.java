@@ -22,7 +22,7 @@ public class InmuebleController {
 
     @Autowired
     private InmuebleService inmuebleService;
-     @Autowired
+    @Autowired
     private UsuarioService usuarioService;
 
     @GetMapping("/cartera-inmuebles")
@@ -49,32 +49,20 @@ public class InmuebleController {
         inmueble.setFechaPublicacion(fechaActual);
 
         //Usuario que realiza la acción:
+        Usuario usuario = usuarioService.encontrarUsuarioPorUsername(user.getUsername());
+        inmueble.setIdUsuario(usuario.getIdUsuario());
+
         inmuebleService.guardar(inmueble);
         return "redirect:/cartera-inmuebles";
     }
 
     @GetMapping("/ver-inmueble/{idInmueble}")
-    public String ver(Inmueble inmueble, Model model, @AuthenticationPrincipal User user) {
+    public String ver(Inmueble inmueble, Usuario usuario, Model model, @AuthenticationPrincipal User user) {
         inmueble = inmuebleService.encontrarInmueble(inmueble);
-        /*
-        *
-        **
-        **
-        **
-        **
-        **
-        **
-        **
-        *
-        
-        
-        */
-        Usuario usuario = usuarioService.encontrarUsuarioPorUsername(user.getUsername());
-
-        System.out.println("finbyusername (email): " + usuario.getEmail());
-                System.out.println("finbyusername (telefono): " + usuario.getTelefono());
+        usuario = usuarioService.encontrarUsuarioPorUsername(user.getUsername());
 
         model.addAttribute("inmueble", inmueble);
+        model.addAttribute("usuario", usuario);
         return "ver_inmueble";
     }
 

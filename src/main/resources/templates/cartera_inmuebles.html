@@ -207,7 +207,7 @@
                         <div class="card-header py-3">
                             <br>
                             <a th:href="@{/nuevo-inmueble}" class="btn btn-success btn-icon-split btn-sm"><span
-                                    class="icon text-white-50"> <i class="fas fa-edit"> </i></span><span
+                                    class="icon text-white-50"> <i class="fas fa-plus"> </i></span><span
                                     class="text">Añadir nuevo inmueble</span></a>
                         </div>
                         <div class="card-body">
@@ -244,15 +244,19 @@
                                     <tbody>
                                         <tr th:each="inmueble : ${listaInmueblesModel}">
                                             <td th:text="${inmueble.idInmueble}"></td>
-                                            <td style="width: 150px;"> <img th:src="${inmueble.imagen}" style="width: 150px;"/> </td>
+                                            <td style="width: 150px;"> <img th:src="${inmueble.imagen}"
+                                                    style="width: 150px;" /> </td>
                                             <td th:text="${inmueble.tipo}" style="text-transform:uppercase;"></td>
-                                            <td th:text="${inmueble.denominacion}" ></td>
+                                            <td th:text="${inmueble.denominacion}"></td>
                                             <td th:text="${inmueble.precio} + €"></td>
                                             <td th:text="${inmueble.superficieTotal}"></td>
                                             <td th:text="${inmueble.poblacion}"></td>
                                             <td th:text="${inmueble.provincia}"></td>
-                                            <td> <a th:href="@{/ver-inmueble/} + ${inmueble.idInmueble}"
-                                                    th:text="Ver" class="btn" style="background-color: #0b2d4f; color: rgba(255,255,255,.8);"/>
+                                            <td> 
+                                                <a th:href="@{/ver-inmueble/} + ${inmueble.idInmueble}"
+                                                    class="btn btn-secondary btn-icon-split btn-sm"><span
+                                                        class="icon text-white-50"> <i class="fas fa-eye">
+                                                        </i></span><span class="text" >Detalles</span></a>
                                             </td>
                                         </tr>
                                     </tbody>
