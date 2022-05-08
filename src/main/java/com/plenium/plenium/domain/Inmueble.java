@@ -28,7 +28,6 @@ public class Inmueble implements Serializable {
     @NotEmpty
     private String tipo;
 
-    //@NotNull
     private Integer precio;
 
     private Integer superficieUtil;
@@ -44,10 +43,8 @@ public class Inmueble implements Serializable {
     @NotEmpty
     private String provincia;
 
-    //@NotNull
     private Integer dormitorios;
 
-    //@NotNull
     private Integer banos;
 
     private String amueblado;
@@ -66,13 +63,13 @@ public class Inmueble implements Serializable {
 
     private String terraza;
 
-    private String jardin;
-
     private String aparcamiento;
 
     private String ascensor;
 
     private String piscina;
+
+    private String jardin;
 
     @NotEmpty
     private String propietarioNombre;
@@ -92,4 +89,42 @@ public class Inmueble implements Serializable {
     private String imagen;
 
     private Long idUsuario;
+
+    public Inmueble() {
+    }
+
+    public Inmueble(Long idInmueble, Date fechaPublicacion, String denominacion, String tipo, Integer precio, Integer superficieUtil, Integer superficieTotal, String direccion, String poblacion, String provincia, Integer dormitorios, Integer banos, String amueblado, String cocinaEquipada, String aireAcondicionado, String calefaccionCentral, String gasNatural, String placasSolares, String armariosEmpotrados, String terraza, String aparcamiento, String ascensor, String piscina, String jardin, String propietarioNombre, String propietarioApellidos, String propietarioNif, String propietarioTelefono, String propietarioEmail, String imagen, Long idUsuario) {
+        this.idInmueble = idInmueble;
+        this.fechaPublicacion = fechaPublicacion;
+        this.denominacion = denominacion;
+        this.tipo = tipo;
+        this.precio = precio;
+        this.superficieUtil = superficieUtil;
+        this.superficieTotal = superficieTotal;
+        this.direccion = direccion;
+        this.poblacion = poblacion;
+        this.provincia = provincia;
+        this.dormitorios = dormitorios;
+        this.banos = banos;
+        this.amueblado = amueblado;
+        this.cocinaEquipada = cocinaEquipada;
+        this.aireAcondicionado = aireAcondicionado;
+        this.calefaccionCentral = calefaccionCentral;
+        this.gasNatural = gasNatural;
+        this.placasSolares = placasSolares;
+        this.armariosEmpotrados = armariosEmpotrados;
+        this.terraza = terraza;
+        this.aparcamiento = aparcamiento;
+        this.ascensor = ascensor;
+        this.piscina = piscina;
+        this.jardin = jardin;
+        this.propietarioNombre = propietarioNombre;
+        this.propietarioApellidos = propietarioApellidos;
+        this.propietarioNif = propietarioNif;
+        this.propietarioTelefono = propietarioTelefono;
+        this.propietarioEmail = propietarioEmail;
+        this.imagen = imagen;
+        this.idUsuario = idUsuario;
+    }
+
 }

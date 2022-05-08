@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @Slf4j
@@ -79,7 +80,6 @@ public class InmuebleController {
         return "redirect:/cartera-inmuebles";
     }
 
-    //Búsqueda avanzada
     @GetMapping("/buscador")
     public String buscador(Model model) {
         var listaInmuebles = inmuebleService.listarInmuebles();
@@ -88,9 +88,10 @@ public class InmuebleController {
     }
 
     @PostMapping("/buscar-inmuebles")
-    public String buscar(@Valid Inmueble inmueble) {
-        inmuebleService.guardar(inmueble);
-        return "redirect:/cartera-inmuebles";
+    public String buscar(Model model, @RequestParam("precioMin") Integer precioMin, @RequestParam("precioMax") Integer precioMax) {
+        var listaInmuebles = inmuebleService.buscarInmuebles(precioMin, precioMax);
+        model.addAttribute("listaInmueblesModel", listaInmuebles);
+        return "lista_inmuebles";
     }
 
 }
