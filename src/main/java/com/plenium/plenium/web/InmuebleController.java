@@ -88,8 +88,40 @@ public class InmuebleController {
     }
 
     @PostMapping("/buscar-inmuebles")
-    public String buscar(Model model, @RequestParam("precioMin") Integer precioMin, @RequestParam("precioMax") Integer precioMax) {
-        var listaInmuebles = inmuebleService.buscarInmuebles(precioMin, precioMax);
+    public String buscar(Model model,
+            @RequestParam("precioMin") Integer precioMin,
+            @RequestParam("precioMax") Integer precioMax,
+            @RequestParam("dormitoriosMin") Integer dormitoriosMin,
+            @RequestParam("dormitoriosMax") Integer dormitoriosMax,
+            @RequestParam("superficieMin") Integer superficieMin,
+            @RequestParam("superficieMax") Integer superficieMax,
+            @RequestParam("tipo") String tipo,
+            @RequestParam("poblacion") String poblacion,
+            @RequestParam("provincia") String provincia) {
+
+        System.out.println("INPUTS:");
+        System.out.println("Precio min: " + precioMin);
+        System.out.println("Precio max: " + precioMax);
+        System.out.println("Dorm min: " + dormitoriosMin);
+        System.out.println("Dorm max: " + dormitoriosMax);
+        System.out.println("Sup min: " + superficieMin);
+        System.out.println("Sup max: " + superficieMax);
+        
+        System.out.println("Tipo: " + tipo);
+        System.out.println("Poblacion: " + poblacion);
+        System.out.println("Provincia: " + provincia);
+
+        var listaInmuebles = inmuebleService.buscarInmuebles(
+                precioMin,
+                precioMax,
+                dormitoriosMin,
+                dormitoriosMax,
+                superficieMin,
+                superficieMax,
+                tipo,
+                poblacion,
+                provincia
+        );
         model.addAttribute("listaInmueblesModel", listaInmuebles);
         return "lista_inmuebles";
     }

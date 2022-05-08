@@ -13,6 +13,15 @@ public interface InmuebleService {
 
     public Inmueble encontrarInmueble(Inmueble inmueble);
 
-    public List<Inmueble> buscarInmuebles(Integer precioMin, Integer precioMax);
+    public List<Inmueble> buscarInmuebles(
+            Integer precioMin,
+            Integer precioMax,
+            Integer dormitoriosMin,
+            Integer dormitoriosMax,
+            Integer superficieMin,
+            Integer superficieMax,
+            String tipo,
+            String poblacion,
+            String provincia);
 
 }

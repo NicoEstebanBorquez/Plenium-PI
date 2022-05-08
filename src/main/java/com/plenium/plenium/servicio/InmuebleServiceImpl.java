@@ -48,22 +48,72 @@ public class InmuebleServiceImpl implements InmuebleService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Inmueble> buscarInmuebles(Integer paramPrecioMin, Integer paramPrecioMax) {
+    public List<Inmueble> buscarInmuebles(
+            Integer p_PrecioMin,
+            Integer p_PrecioMax,
+            Integer p_dormitoriosMin,
+            Integer p_dormitoriosMax,
+            Integer p_superficieMin,
+            Integer p_superficieMax,
+            String p_tipo,
+            String p_poblacion,
+            String p_provincia) {
 
         //Parámetros de búsqueda -------------------------------------------------------
         int precioMin = 0;
         int precioMax = 9999999;
+        int dormitoriosMin = 0;
+        int dormitoriosMax = 99;
+        int superficieMin = 0;
+        int superficieMax = 999;
+        String poblacion_b = "%";
+        String provincia_b = "%";
+        String tipo_b = "%";
 
-        if (paramPrecioMin != 0) {
-            precioMin = paramPrecioMin;
+        if (p_PrecioMin != 0) {
+            precioMin = p_PrecioMin;
         }
 
-        if (paramPrecioMax != 0) {
-            precioMax = paramPrecioMax;
+        if (p_PrecioMax != 0) {
+            precioMax = p_PrecioMax;
         }
 
+        if (p_dormitoriosMin != 0) {
+            dormitoriosMin = p_dormitoriosMin;
+        }
+
+        if (p_dormitoriosMax != 0) {
+            dormitoriosMax = p_dormitoriosMax;
+        }
+
+        if (p_superficieMin != 0) {
+            superficieMin = p_superficieMin;
+        }
+
+        if (p_superficieMax != 0) {
+            superficieMax = p_superficieMax;
+        }
+
+        
+        if (!p_poblacion.equals("")) {
+            poblacion_b = p_poblacion;
+        }
+
+        if (!p_provincia.equals("Seleccione una provincia")) {
+            provincia_b = p_provincia;
+        }
+
+        if (!p_tipo.equals("Seleccione tipo de Inmueble")) {
+            tipo_b = p_tipo;
+        }
         //BUSQUEDA -----------------------------------------------------------------------------
-        String SQL_SELECT_BUSQUEDA = "SELECT * FROM `inmuebles` WHERE (`precio` BETWEEN ? AND ?)";
+        String SQL_SELECT_BUSQUEDA = "SELECT * FROM `inmuebles` WHERE "
+                + "(`precio` BETWEEN ? AND ?) AND "
+                + "(`dormitorios` BETWEEN ? AND ?) AND "
+                + "(`superficie_total` BETWEEN ? AND ?) AND "
+                + "(`poblacion` LIKE ?) AND "
+                + "(`provincia` LIKE ?) AND "
+                + "(`tipo` LIKE ?)";
 
         //Método de búsqueda
         Connection cn = null;
@@ -78,6 +128,14 @@ public class InmuebleServiceImpl implements InmuebleService {
 
             ps.setInt(1, precioMin);
             ps.setInt(2, precioMax);
+            ps.setInt(3, dormitoriosMin);
+            ps.setInt(4, dormitoriosMax);
+            ps.setInt(5, superficieMin);
+            ps.setInt(6, superficieMax);
+            ps.setString(7, poblacion_b);
+            ps.setString(8, provincia_b);
+            ps.setString(9, tipo_b);
+            
             rs = ps.executeQuery();
 
             while (rs.next()) {
