@@ -26,10 +26,10 @@ public class InmuebleController {
     private UsuarioService usuarioService;
 
     @GetMapping("/cartera-inmuebles")
-    public String inicio(Model model) {
+    public String listaInmuebles(Model model) {
         var listaInmuebles = inmuebleService.listarInmuebles();
         model.addAttribute("listaInmueblesModel", listaInmuebles);
-        return "cartera_inmuebles";
+        return "lista_inmuebles";
     }
 
     @GetMapping("/nuevo-inmueble")
@@ -78,4 +78,19 @@ public class InmuebleController {
         inmuebleService.eliminar(inmueble);
         return "redirect:/cartera-inmuebles";
     }
+
+    //Búsqueda avanzada
+    @GetMapping("/buscador")
+    public String buscador(Model model) {
+        var listaInmuebles = inmuebleService.listarInmuebles();
+        model.addAttribute("listaInmueblesModel", listaInmuebles);
+        return "buscador";
+    }
+
+    @PostMapping("/buscar-inmuebles")
+    public String buscar(@Valid Inmueble inmueble) {
+        inmuebleService.guardar(inmueble);
+        return "redirect:/cartera-inmuebles";
+    }
+
 }

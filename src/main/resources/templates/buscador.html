@@ -8,16 +8,16 @@
     <title>Plenium</title>
 
     <!-- Custom fonts for this template -->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
-    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -26,7 +26,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul style="background-color: #0b2d4f" ; class="navbar-nav  sidebar sidebar-dark accordion"
+        <ul style="background-color: #0b2d4f;" ; class="navbar-nav  sidebar sidebar-dark accordion"
             id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
@@ -48,7 +48,7 @@
             <hr class="sidebar-divider">
 
             <!-- Titulo sección - Inmuebles -->
-            <div class="sidebar-heading active">
+            <div class="sidebar-heading">
                 Inmuebles
             </div>
 
@@ -62,7 +62,7 @@
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Añadir nuevo Inmueble</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" th:href="@{/buscador}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Buscador de Inmuebles</span></a>
@@ -149,7 +149,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="../img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -181,18 +181,16 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Editar Inmueble</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Buscador de Inmuebles</h1>
+
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <br>
-                            <a th:href="@{/cartera-inmuebles}" class="btn btn-secondary btn-icon-split btn-sm"><span
-                                    class="icon text-white-50"> <i class="fas fa-reply"> </i></span><span
-                                    class="text">Atrás</span></a>
-                        </div>
+
+                        <!--Parámetros de búsqueda-->
                         <div class="card-body">
                             <div class="table">
+
                                 <form th:action="@{/guardar-inmueble}" method="post" th:object="${inmueble}"
                                     class="user">
                                     <input type="hidden" name="idInmueble" th:field="*{idInmueble}" />
@@ -216,8 +214,6 @@
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label for="tipo">Tipo <span style="color:red">*</span></label>
-                                            <!-- <input type="text" name="tipo" th:field="*{tipo}" class="form-control" />-->
-
                                             <select th:field="*{tipo}" class="form-control">
                                                 <option th:value="'---'" th:text="---"></option>
                                                 <option th:value="'PISO'" th:text="PISO"></option>
@@ -413,6 +409,64 @@
                                             class="text">Cancelar</span></a>
                                 </form>
                             </div>
+
+                        <!--Parámetros de búsqueda-->
+
+                        <div class="card-body">
+                            <!--TABLA-->
+                            <div class="table-responsive"
+                                th:if="${listaInmueblesModel != null and !listaInmueblesModel.empty}">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Ref.</th>
+                                            <th>Imagen</th>
+                                            <th>Tipo</th>
+                                            <th>Denominación</th>
+                                            <th>Precio</th>
+                                            <th>m<sup>2</sup></th>
+                                            <th>Población</th>
+                                            <th>Provincia</th>
+                                            <th>Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Ref.</th>
+                                            <th>Imagen</th>
+                                            <th>Tipo</th>
+                                            <th>Denominación</th>
+                                            <th>Precio</th>
+                                            <th>m<sup>2</sup></th>
+                                            <th>Población</th>
+                                            <th>Provincia</th>
+                                            <th>Acción</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr th:each="inmueble : ${listaInmueblesModel}">
+                                            <td th:text="${inmueble.idInmueble}"></td>
+                                            <td style="width: 150px;"> <img th:src="${inmueble.imagen}"
+                                                    style="width: 150px;" /> </td>
+                                            <td th:text="${inmueble.tipo}" style="text-transform:uppercase;"></td>
+                                            <td th:text="${inmueble.denominacion}"></td>
+                                            <td th:text="${inmueble.precio} + €"></td>
+                                            <td th:text="${inmueble.superficieTotal}"></td>
+                                            <td th:text="${inmueble.poblacion}"></td>
+                                            <td th:text="${inmueble.provincia}"></td>
+                                            <td>
+                                                <a th:href="@{/ver-inmueble/} + ${inmueble.idInmueble}"
+                                                    class="btn btn-secondary btn-icon-split btn-sm"><span
+                                                        class="icon text-white-50"> <i class="fas fa-eye">
+                                                        </i></span><span class="text">Detalles</span></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div th:if="${listaInmueblesModel == null or listaInmueblesModel.empty}">
+                                La lista de inmuebles está vacía.
+                            </div>
                         </div>
                     </div>
 
@@ -462,21 +516,21 @@
         </div>
     </div>
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../js/sb-admin-2.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../js/demo/datatables-demo.js"></script>
+    <script src="js/demo/datatables-demo.js"></script>
 </body>
 
 </html>

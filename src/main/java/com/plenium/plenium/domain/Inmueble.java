@@ -29,11 +29,11 @@ public class Inmueble implements Serializable {
     private String tipo;
 
     //@NotNull
-    private Double precio;
+    private Integer precio;
 
-    private Double superficieUtil;
+    private Integer superficieUtil;
 
-    private Double superficieTotal;
+    private Integer superficieTotal;
 
     @NotEmpty
     private String direccion;

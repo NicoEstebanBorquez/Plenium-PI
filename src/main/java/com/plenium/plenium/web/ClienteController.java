@@ -26,7 +26,7 @@ public class ClienteController {
     private UsuarioService usuarioService;
 
     @GetMapping("/lista-clientes")
-    public String inicio(Model model) {
+    public String listaClientes(Model model) {
         var listaClientes = clienteService.listarClientes();
         model.addAttribute("listaClientesModel", listaClientes);
         return "lista_clientes";
