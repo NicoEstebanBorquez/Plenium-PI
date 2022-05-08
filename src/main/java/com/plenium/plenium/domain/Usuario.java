@@ -1,6 +1,7 @@
 package com.plenium.plenium.domain;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -18,10 +19,10 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
 
-    @NotEmpty
+    private Date fechaAlta;
+
     private String username;
 
-    @NotEmpty
     private String password;
 
     @OneToMany
@@ -30,16 +31,16 @@ public class Usuario implements Serializable {
 
     @NotEmpty
     private String nombre;
-    
+
     @NotEmpty
     private String primerApellido;
-    
+
     private String segundoApellido;
-    
+
     @NotEmpty
     private String telefono;
-    
+
     @NotEmpty
     @Email
-    private String email;   
+    private String email;
 }

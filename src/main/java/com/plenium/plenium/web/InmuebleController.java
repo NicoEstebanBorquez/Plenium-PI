@@ -99,18 +99,6 @@ public class InmuebleController {
             @RequestParam("poblacion") String poblacion,
             @RequestParam("provincia") String provincia) {
 
-        System.out.println("INPUTS:");
-        System.out.println("Precio min: " + precioMin);
-        System.out.println("Precio max: " + precioMax);
-        System.out.println("Dorm min: " + dormitoriosMin);
-        System.out.println("Dorm max: " + dormitoriosMax);
-        System.out.println("Sup min: " + superficieMin);
-        System.out.println("Sup max: " + superficieMax);
-        
-        System.out.println("Tipo: " + tipo);
-        System.out.println("Poblacion: " + poblacion);
-        System.out.println("Provincia: " + provincia);
-
         var listaInmuebles = inmuebleService.buscarInmuebles(
                 precioMin,
                 precioMax,

@@ -18,4 +18,14 @@ public class Rol implements Serializable{
     
     @NotEmpty
     private String nombre;
+
+    public Rol() {
+    }
+
+    public Rol(Long idRol, String nombre) {
+        this.idRol = idRol;
+        this.nombre = nombre;
+    }
+    
+    
 }

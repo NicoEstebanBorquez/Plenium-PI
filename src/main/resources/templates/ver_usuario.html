@@ -8,16 +8,16 @@
     <title>Plenium</title>
 
     <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -111,7 +111,7 @@
             <div class="sidebar-heading" sec:authorize="hasRole('ROLE_ADMIN')">
                 Gestión de Usuarios
             </div>
-            <li class="nav-item active" sec:authorize="hasRole('ROLE_ADMIN')">
+            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
                 <a class="nav-link" th:href="@{/lista-usuarios}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Lista de Usuarios</span></a>
@@ -149,7 +149,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -181,128 +181,143 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Lista de Usuarios</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Información del Usuario</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <br>
-                            <a th:href="@{/nuevo-usuario}" class="btn btn-success btn-icon-split btn-sm"><span
-                                    class="icon text-white-50"> <i class="fas fa-plus"> </i></span><span
-                                    class="text">Añadir nuevo Usuario</span></a>
+                            <a th:href="@{/lista-usuarios}" class="btn btn-secondary btn-icon-split btn-sm"><span
+                                    class="icon text-white-50"> <i class="fas fa-reply"> </i></span><span
+                                    class="text">Atrás</span></a>
+                            <a th:href="@{/editar-usuario/} + ${usuario.idUsuario}"
+                                class="btn btn-success btn-icon-split btn-sm"><span class="icon text-white-50"> <i
+                                        class="fas fa-edit"> </i></span><span class="text">Editar usuario</span></a>
+                            <a th:href="@{/eliminar-usuario/} + ${usuario.idUsuario}"
+                                class="btn btn-danger btn-icon-split btn-sm"><span class="icon text-white-50"> <i
+                                        class="fas fa-trash"> </i></span><span class="text">Eliminar usuario</span></a>
                         </div>
                         <div class="card-body">
-                            <!--TABLA-->
-                            <div class="table"
-                                th:if="${listaUsuariosModel != null and !listaUsuariosModel.empty}">
+                            <div class="table">
 
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Fecha de alta</th>
-                                                <th>Nombre completo</th>
-                                                <th>Teléfono</th>
-                                                <th>E-mail</th>
-                                                <th>Acción</th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Fecha de alta</th>
-                                                <th>Nombre completo</th>
-                                                <th>Teléfono</th>
-                                                <th>E-mail</th>
-                                                <th>Acción</th>
-                                            </tr>
-                                        </tfoot>
-                                        <tbody>
-                                            <tr th:each="usuario : ${listaUsuariosModel}">
-                                                <td th:text="${usuario.idUsuario}"></td>
-                                                <td th:text="${usuario.fechaAlta}"></td>
-                                                <td
-                                                    th:text="${usuario.nombre} + ' ' + ${usuario.primerApellido} + ' ' + ${usuario.segundoApellido}">
-                                                </td>
-                                                <td th:text="${usuario.telefono}"></td>
-                                                <td th:text="${usuario.email}"></td>
-                                                <td> <a th:href="@{/ver-usuario/} + ${usuario.idUsuario}"
-                                                    class="btn btn-secondary btn-icon-split btn-sm"><span
-                                                        class="icon text-white-50"> <i class="fas fa-eye">
-                                                        </i></span><span class="text">Detalles</span></a> </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div th:if="${listaUsuariosModel == null or listaUsuariosModel.empty}">
-                                    La lista de usuarios está vacía.
-                                </div>
+                                <form th:object="${usuario}" class="user">
+                                    <input type="hidden" name="idUsuario" th:field="*{idUsuario}" />
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <h6 class="font-weight-bold"><u>Información general:</u></h6>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="fechaAlta" class="font-weight-bold">Fecha de alta:</label>
+                                            <label th:text="*{fechaAlta}"></label>
+                                        </div>
+                                    </div>
+
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-3">
+                                            <label for="nombre" class="font-weight-bold">Nombre:</label>
+                                            <label th:text="*{nombre}"></label>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="primerApellido" class="font-weight-bold">Primer
+                                                apellido:</label>
+                                            <label th:text="*{primerApellido}"></label>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label for="segundoApellido" class="font-weight-bold">Segundo
+                                                apellido:</label>
+                                            <label th:text="*{segundoApellido}"></label>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label for="username" class="font-weight-bold">Username:</label>
+                                            <label th:text="*{username}"></label>
+                                        </div>
+                                    </div>
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="email" class="font-weight-bold">Correo electrónico:</label>
+                                            <label th:text="*{email}"></label>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="telefono" class="font-weight-bold">Teléfono:</label>
+                                            <label th:text="*{telefono}"></label>
+                                        </div>
+                                    </div>
+                                    <!-- ----------------------- ROW ----------------------- -->
+
+                                </form>
                             </div>
-                        </div>
 
-                    </div>
-                    <!-- /.container-fluid -->
-
-                </div>
-                <!-- End of Main Content -->
-
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span><b>Autor:</b> Nicolás Esteban Bórquez</span>
-                            <br>
-                            <br>
-                            <span><b>Asignatura:</b> Proyecto Integrado - Instituto FOC</span>
                         </div>
                     </div>
-                </footer>
-                <!-- End of Footer -->
+
+                </div>
+                <!-- /.container-fluid -->
+
 
             </div>
-            <!-- End of Content Wrapper -->
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span><b>Autor:</b> Nicolás Esteban Bórquez</span>
+                        <br>
+                        <br>
+                        <span><b>Asignatura:</b> Proyecto Integrado - Instituto FOC</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
 
         </div>
-        <!-- End of Page Wrapper -->
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
 
 
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="login.html">Logout</a>
-                    </div>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="../js/sb-admin-2.min.js"></script>
 
-        <!-- Page level plugins -->
-        <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-        <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Page level plugins -->
+    <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-        <!-- Page level custom scripts -->
-        <script src="js/demo/datatables-demo.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="../js/demo/datatables-demo.js"></script>
 
 </body>
 
