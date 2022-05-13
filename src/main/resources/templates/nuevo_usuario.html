@@ -201,7 +201,7 @@
                                     <!-- ----------------------- ROW ----------------------- -->
                                     <div class="form-row">
                                         <div class="form-group col-md-3">
-                                            <label for="nombre">Nombre:</label>
+                                            <label for="nombre">Nombre: <span style="color:red">*</span></label>
                                             <input type="text" name="nombre" th:field="*{nombre}"
                                                 class="form-control " />
                                             <label style="color:red;" th:if="${#fields.hasErrors('nombre')}"
@@ -209,7 +209,7 @@
 
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label for="primerApellido">Primer apellido:</label>
+                                            <label for="primerApellido">Primer apellido: <span style="color:red">*</span></label>
                                             <input type="text" name="primerApellido" th:field="*{primerApellido}"
                                                 class="form-control " />
                                             <label style="color:red;" th:if="${#fields.hasErrors('primerApellido')}"
@@ -227,13 +227,13 @@
                                     <!-- ----------------------- ROW ----------------------- -->
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <label for="email">Correo electrónico:</label>
+                                            <label for="email">Correo electrónico: <span style="color:red">*</span></label>
                                             <input type="text" name="email" th:field="*{email}" class="form-control " />
                                             <label style="color:red;" th:if="${#fields.hasErrors('email')}"
                                                 th:errors="*{email}">Error email</label>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="telefono">Teléfono:</label>
+                                            <label for="telefono">Teléfono: <span style="color:red">*</span></label>
                                             <input type="text" name="telefono" th:field="*{telefono}"
                                                 class="form-control " />
                                             <label style="color:red;" th:if="${#fields.hasErrors('telefono')}"
@@ -243,14 +243,14 @@
                                     <!-- ----------------------- ROW ----------------------- -->
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <label for="username">Username:</label>
+                                            <label for="username">Username: <span style="color:red">*</span></label>
                                             <input type="text" name="username" th:field="*{username}"
                                                 class="form-control " />
                                             <label style="color:red;" th:if="${#fields.hasErrors('username')}"
                                                 th:errors="*{username}">Error username</label>
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label for="password">Password:</label>
+                                            <label for="password">Password: <span style="color:red">*</span></label>
                                             <input type="password" name="password" th:field="*{password}"
                                                 class="form-control " />
                                             <label style="color:red;" th:if="${#fields.hasErrors('password')}"
