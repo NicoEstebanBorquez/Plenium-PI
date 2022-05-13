@@ -24,4 +24,6 @@ public interface InmuebleService {
             String poblacion,
             String provincia);
 
+    public int totalInmuebles();
+
 }

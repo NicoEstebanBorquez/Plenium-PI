@@ -187,5 +187,11 @@ public class InmuebleServiceImpl implements InmuebleService {
         }
         return lista;
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public int totalInmuebles() {
+        return inmuebleDao.findAll().size();
+    }
 
 }

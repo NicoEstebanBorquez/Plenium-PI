@@ -36,4 +36,10 @@ public class ClienteServiceImpl implements ClienteService {
     public Cliente encontrarCliente(Cliente cliente) {
         return clienteDao.findById(cliente.getIdCliente()).orElse(null);
     }
+    
+     @Override
+    @Transactional(readOnly = true)
+    public int totalClientes() {
+        return clienteDao.findAll().size();
+    }
 }
