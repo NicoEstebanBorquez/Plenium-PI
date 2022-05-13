@@ -98,12 +98,12 @@
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Consultar agenda</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" th:href="@{/nueva-tarea}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Añadir nueva tarea</span></a>
             </li>
-            
+
             <!-- Divisor -->
             <hr class="sidebar-divider">
 
@@ -116,7 +116,7 @@
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Lista de Usuarios</span></a>
             </li>
-            <li class="nav-item active" sec:authorize="hasRole('ROLE_ADMIN')">
+            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
                 <a class="nav-link" th:href="@{/nuevo-usuario}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Añadir nuevo Usuario</span></a>
@@ -181,95 +181,81 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Añadir nuevo Usuario</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Añadir nueva Tarea</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <br>
-                            <a th:href="@{/lista-usuarios}" class="btn btn-secondary btn-icon-split btn-sm"><span
+                            <a th:href="@{/lista-tareas}" class="btn btn-secondary btn-icon-split btn-sm"><span
                                     class="icon text-white-50"> <i class="fas fa-reply"> </i></span><span
                                     class="text">Atrás</span></a>
                         </div>
                         <div class="card-body">
                             <div class="table">
 
-                                <form th:action="@{/guardar-usuario}" method="post" th:object="${usuario}" class="user">
-                                    <input type="hidden" name="idUsuario" th:field="*{idUsuario}" />
+                                <form th:action="@{/guardar-tarea}" method="post" th:object="${tarea}" class="user">
+                                    <input type="hidden" name="idTarea" th:field="*{idTarea}" />
 
                                     <h6 class="font-weight-bold"><u>Información general:</u></h6>
                                     <!-- ----------------------- ROW ----------------------- -->
                                     <div class="form-row">
-                                        <div class="form-group col-md-3">
-                                            <label for="nombre">Nombre: <span style="color:red">*</span></label>
-                                            <input type="text" name="nombre" th:field="*{nombre}"
-                                                class="form-control " />
-                                            <label style="color:red;" th:if="${#fields.hasErrors('nombre')}"
-                                                th:errors="*{nombre}">Error Nombre</label>
+                                        <div class="form-group col-md-4">
+                                            <label for="tipo">Tipo: <span style="color:red">*</span></label>
+                                            <select th:field="*{tipo}" class="form-control">
+                                                <option th:value="'---'" th:text="---"></option>
+                                                <option th:value="'VISITA A INMUEBLE'">VISITA A INMUEBLE</option>
+                                                <option th:value="'REUNIÓN CON CLIENTE'">REUNIÓN CON CLIENTE</option>
+                                                <option th:value="'REUNIÓN CON PROPIETARIO'">REUNIÓN CON PROPIETARIO
+                                                </option>
+                                                <option th:value="'LLAMADA TELEFÓNICA'">LLAMADA TELEFÓNICA</option>
+                                                <option th:value="'CAPTACIÓN NUEVO INMUEBLE'">CAPTACIÓN NUEVO INMUEBLE
+                                                </option>
+                                                <option th:value="'OTRO MOTIVO'">OTRO MOTIVO</option>
+                                            </select>
 
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="primerApellido">Primer apellido: <span style="color:red">*</span></label>
-                                            <input type="text" name="primerApellido" th:field="*{primerApellido}"
-                                                class="form-control " />
-                                            <label style="color:red;" th:if="${#fields.hasErrors('primerApellido')}"
-                                                th:errors="*{primerApellido}">Error primerApellido</label>
 
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="segundoApellido">Segundo apellido:</label>
-                                            <input type="text" name="segundoApellido" th:field="*{segundoApellido}"
-                                                class="form-control " />
-
-                                        </div>
-                                    </div>
-
-                                    <!-- ----------------------- ROW ----------------------- -->
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="email">Correo electrónico: <span style="color:red">*</span></label>
-                                            <input type="text" name="email" th:field="*{email}" class="form-control " />
-                                            <label style="color:red;" th:if="${#fields.hasErrors('email')}"
-                                                th:errors="*{email}">Error email</label>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="telefono">Teléfono: <span style="color:red">*</span></label>
-                                            <input type="text" name="telefono" th:field="*{telefono}"
-                                                class="form-control " />
-                                            <label style="color:red;" th:if="${#fields.hasErrors('telefono')}"
-                                                th:errors="*{telefono}">Error telefono</label>
                                         </div>
                                     </div>
                                     <!-- ----------------------- ROW ----------------------- -->
                                     <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="username">Username: <span style="color:red">*</span></label>
-                                            <input type="text" name="username" th:field="*{username}"
-                                                class="form-control " />
-                                            <label style="color:red;" th:if="${#fields.hasErrors('username')}"
-                                                th:errors="*{username}">Error username</label>
+                                        <div class="form-group col-md-3">
+                                            <label for="fechaVencimiento">Fecha de vencimiento:<span
+                                                    style="color:red">*</span></label>
+                                            <input type="date" min="2022-01-01" max="2023-12-31" name="fechaVencimiento"
+                                                th:field="*{fechaVencimiento}" class="form-control" />
                                         </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="password">Password: <span style="color:red">*</span></label>
-                                            <input type="password" name="password" th:field="*{password}"
-                                                class="form-control " />
-                                            <label style="color:red;" th:if="${#fields.hasErrors('password')}"
-                                                th:errors="*{password}">Error password</label>
+                                        <div class="form-group col-md-9">
+                                            <label for="titulo">Título: <span style="color:red">*</span></label>
+                                            <input type="text" name="titulo" th:field="*{titulo}"
+                                                class="form-control" />
+                                            <label style="color:red;" th:if="${#fields.hasErrors('titulo')}"
+                                                th:errors="*{titulo}">Error Titulo</label>
                                         </div>
                                     </div>
                                     <!-- ----------------------- ROW ----------------------- -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="descripcion">Descripción:<span
+                                                    style="color:red">*</span></label>
+                                            <!--<input type="text" name="descripcion" th:field="*{descripcion}" class="form-control " />-->
+                                            <textarea name="descripcion" rows="5" cols="80" th:field="*{descripcion}" class="form-control "></textarea>
+                                            <label style="color:red;" th:if="${#fields.hasErrors('descripcion')}"
+                                                th:errors="*{descripcion}">Error Descripcion</label>
+                                        </div>
+                                    </div>
+                                    
+                                    <hr>
 
                                     <button name="guardar" class="btn btn-success btn-icon-split btn-sm"><span
                                             class="icon text-white-50">
                                             <i class="fas fa-save"> </i></span><span
                                             class="text">Guardar</span></button>
 
-                                    <a th:href="@{/lista-usuarios}"
-                                        class="btn btn-secondary btn-icon-split btn-sm"><span
+                                    <a th:href="@{/lista-tareas}" class="btn btn-secondary btn-icon-split btn-sm"><span
                                             class="icon text-white-50">
                                             <i class="fas fa-window-close"> </i></span><span
                                             class="text">Cancelar</span></a>
-
                                 </form>
                             </div>
 

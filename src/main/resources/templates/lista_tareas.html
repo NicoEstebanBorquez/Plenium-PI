@@ -89,11 +89,11 @@
             <!-- Divisor -->
             <hr class="sidebar-divider">
 
-             <!-- Titulo sección - Agenda -->
-             <div class="sidebar-heading">
+            <!-- Titulo sección - Agenda -->
+            <div class="sidebar-heading">
                 Agenda
             </div>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" th:href="@{/lista-tareas}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Consultar agenda</span></a>
@@ -111,7 +111,7 @@
             <div class="sidebar-heading" sec:authorize="hasRole('ROLE_ADMIN')">
                 Gestión de Usuarios
             </div>
-            <li class="nav-item active" sec:authorize="hasRole('ROLE_ADMIN')">
+            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
                 <a class="nav-link" th:href="@{/lista-usuarios}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Lista de Usuarios</span></a>
@@ -181,62 +181,58 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Lista de Usuarios</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Agenda</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <br>
-                            <a th:href="@{/nuevo-usuario}" class="btn btn-success btn-icon-split btn-sm"><span
+                            <a th:href="@{/nueva-tarea}" class="btn btn-success btn-icon-split btn-sm"><span
                                     class="icon text-white-50"> <i class="fas fa-plus"> </i></span><span
-                                    class="text">Añadir nuevo Usuario</span></a>
+                                    class="text">Añadir nueva Tarea</span></a>
                         </div>
                         <div class="card-body">
                             <!--TABLA-->
-                            <div class="table"
-                                th:if="${listaUsuariosModel != null and !listaUsuariosModel.empty}">
+                            <div class="table-responsive"
+                                th:if="${listaTareasModel != null and !listaTareasModel.empty}">
 
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Fecha de alta</th>
-                                                <th>Nombre completo</th>
-                                                <th>Teléfono</th>
-                                                <th>E-mail</th>
+                                                <th>Fecha de alta:</th>
+                                                <th>Fecha de vencimiento:</th>
+                                                <th>Tipo</th>
+                                                <th>Título</th>
                                                 <th>Acción</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Fecha de alta</th>
-                                                <th>Nombre completo</th>
-                                                <th>Teléfono</th>
-                                                <th>E-mail</th>
+                                                <th>Fecha de alta:</th>
+                                                <th>Fecha de vencimiento:</th>
+                                                <th>Tipo</th>
+                                                <th>Título</th>
                                                 <th>Acción</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            <tr th:each="usuario : ${listaUsuariosModel}">
-                                                <td th:text="${usuario.idUsuario}"></td>
-                                                <td th:text="${usuario.fechaAlta}"></td>
-                                                <td
-                                                    th:text="${usuario.nombre} + ' ' + ${usuario.primerApellido} + ' ' + ${usuario.segundoApellido}">
-                                                </td>
-                                                <td th:text="${usuario.telefono}"></td>
-                                                <td th:text="${usuario.email}"></td>
-                                                <td> <a th:href="@{/ver-usuario/} + ${usuario.idUsuario}"
-                                                    class="btn btn-secondary btn-icon-split btn-sm"><span
-                                                        class="icon text-white-50"> <i class="fas fa-eye">
-                                                        </i></span><span class="text">Detalles</span></a> </td>
+                                            <tr th:each="tarea : ${listaTareasModel}">
+                                                <td th:text="${tarea.fechaPublicacion}"></td>
+                                                <td th:text="${tarea.fechaVencimiento}"></td>
+                                                <td th:text="${tarea.tipo}"></td>
+                                                <td th:text="${tarea.titulo}"></td>
+                                                
+                                                <td> <a th:href="@{/ver-tarea/} + ${tarea.idTarea}"
+                                                        class="btn btn-secondary btn-icon-split btn-sm"><span
+                                                            class="icon text-white-50"> <i class="fas fa-eye">
+                                                            </i></span><span class="text">Detalles</span></a> </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div th:if="${listaUsuariosModel == null or listaUsuariosModel.empty}">
-                                    La lista de usuarios está vacía.
+                                <div th:if="${listaTareasModel == null or listaTareasModel.empty}">
+                                    La Agenda está vacía.
                                 </div>
                             </div>
                         </div>

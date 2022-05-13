@@ -8,16 +8,16 @@
     <title>Plenium</title>
 
     <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -89,8 +89,8 @@
             <!-- Divisor -->
             <hr class="sidebar-divider">
 
-            <!-- Titulo sección - Agenda -->
-            <div class="sidebar-heading">
+             <!-- Titulo sección - Agenda -->
+             <div class="sidebar-heading">
                 Agenda
             </div>
             <li class="nav-item">
@@ -103,7 +103,7 @@
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Añadir nueva tarea</span></a>
             </li>
-            
+
             <!-- Divisor -->
             <hr class="sidebar-divider">
 
@@ -116,7 +116,7 @@
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Lista de Usuarios</span></a>
             </li>
-            <li class="nav-item active" sec:authorize="hasRole('ROLE_ADMIN')">
+            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
                 <a class="nav-link" th:href="@{/nuevo-usuario}">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Añadir nuevo Usuario</span></a>
@@ -149,7 +149,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -181,95 +181,68 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Añadir nuevo Usuario</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Información de Tarea</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <br>
-                            <a th:href="@{/lista-usuarios}" class="btn btn-secondary btn-icon-split btn-sm"><span
+                            <a th:href="@{/lista-tareas}" class="btn btn-secondary btn-icon-split btn-sm"><span
                                     class="icon text-white-50"> <i class="fas fa-reply"> </i></span><span
                                     class="text">Atrás</span></a>
+                            <a th:href="@{/editar-tarea/} + ${tarea.idTarea}"
+                                class="btn btn-success btn-icon-split btn-sm"><span class="icon text-white-50"> <i
+                                        class="fas fa-edit"> </i></span><span class="text">Editar tarea</span></a>
+                            <a th:href="@{/eliminar-tarea/} + ${tarea.idTarea}"
+                                class="btn btn-danger btn-icon-split btn-sm"><span class="icon text-white-50"> <i
+                                        class="fas fa-trash"> </i></span><span class="text">Eliminar tarea</span></a>
                         </div>
                         <div class="card-body">
                             <div class="table">
 
-                                <form th:action="@{/guardar-usuario}" method="post" th:object="${usuario}" class="user">
-                                    <input type="hidden" name="idUsuario" th:field="*{idUsuario}" />
+                                <form th:object="${tarea}" class="user">
+                                    <input type="hidden" name="idTarea" th:field="*{idTarea}" />
 
-                                    <h6 class="font-weight-bold"><u>Información general:</u></h6>
-                                    <!-- ----------------------- ROW ----------------------- -->
                                     <div class="form-row">
-                                        <div class="form-group col-md-3">
-                                            <label for="nombre">Nombre: <span style="color:red">*</span></label>
-                                            <input type="text" name="nombre" th:field="*{nombre}"
-                                                class="form-control " />
-                                            <label style="color:red;" th:if="${#fields.hasErrors('nombre')}"
-                                                th:errors="*{nombre}">Error Nombre</label>
-
+                                        <div class="form-group col-md-8">
+                                            <h6 class="font-weight-bold"><u>Información general:</u></h6>
                                         </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="primerApellido">Primer apellido: <span style="color:red">*</span></label>
-                                            <input type="text" name="primerApellido" th:field="*{primerApellido}"
-                                                class="form-control " />
-                                            <label style="color:red;" th:if="${#fields.hasErrors('primerApellido')}"
-                                                th:errors="*{primerApellido}">Error primerApellido</label>
-
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="segundoApellido">Segundo apellido:</label>
-                                            <input type="text" name="segundoApellido" th:field="*{segundoApellido}"
-                                                class="form-control " />
-
+                                        <div class="form-group col-md-4">
+                                            <label for="tipo" class="font-weight-bold">Tipo:</label>
+                                            <label th:text="*{tipo}"></label>
                                         </div>
                                     </div>
 
                                     <!-- ----------------------- ROW ----------------------- -->
                                     <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="email">Correo electrónico: <span style="color:red">*</span></label>
-                                            <input type="text" name="email" th:field="*{email}" class="form-control " />
-                                            <label style="color:red;" th:if="${#fields.hasErrors('email')}"
-                                                th:errors="*{email}">Error email</label>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="telefono">Teléfono: <span style="color:red">*</span></label>
-                                            <input type="text" name="telefono" th:field="*{telefono}"
-                                                class="form-control " />
-                                            <label style="color:red;" th:if="${#fields.hasErrors('telefono')}"
-                                                th:errors="*{telefono}">Error telefono</label>
+                                        <div class="form-group col-md-3">
+                                            <label for="fechaPublicacion" class="font-weight-bold">Fecha de alta:</label>
+                                            <label th:text="*{fechaPublicacion}"></label>
                                         </div>
                                     </div>
                                     <!-- ----------------------- ROW ----------------------- -->
                                     <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="username">Username: <span style="color:red">*</span></label>
-                                            <input type="text" name="username" th:field="*{username}"
-                                                class="form-control " />
-                                            <label style="color:red;" th:if="${#fields.hasErrors('username')}"
-                                                th:errors="*{username}">Error username</label>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label for="password">Password: <span style="color:red">*</span></label>
-                                            <input type="password" name="password" th:field="*{password}"
-                                                class="form-control " />
-                                            <label style="color:red;" th:if="${#fields.hasErrors('password')}"
-                                                th:errors="*{password}">Error password</label>
+                                        <div class="form-group col-md-3">
+                                            <label for="fechaVencimiento" class="font-weight-bold">Fecha de vencimiento:</label>
+                                            <label th:text="*{fechaVencimiento}"></label>
                                         </div>
                                     </div>
                                     <!-- ----------------------- ROW ----------------------- -->
-
-                                    <button name="guardar" class="btn btn-success btn-icon-split btn-sm"><span
-                                            class="icon text-white-50">
-                                            <i class="fas fa-save"> </i></span><span
-                                            class="text">Guardar</span></button>
-
-                                    <a th:href="@{/lista-usuarios}"
-                                        class="btn btn-secondary btn-icon-split btn-sm"><span
-                                            class="icon text-white-50">
-                                            <i class="fas fa-window-close"> </i></span><span
-                                            class="text">Cancelar</span></a>
-
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="titulo" class="font-weight-bold">Título:</label>
+                                            <label th:text="*{titulo}"></label>
+                                        </div>
+                                    </div>
+                                    <!-- ----------------------- ROW ----------------------- -->
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12" >
+                                            <label for="descripcion" class="font-weight-bold">Descripción:</label>
+                                            <br>
+                                            <label th:text="*{descripcion}"></label>
+                                        </div>
+                                    </div>
+                                    <!-- ----------------------- ROW ----------------------- -->
                                 </form>
                             </div>
 
@@ -321,22 +294,23 @@
             </div>
         </div>
     </div>
+
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="../js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+    <script src="../js/demo/datatables-demo.js"></script>
 
 </body>
 
