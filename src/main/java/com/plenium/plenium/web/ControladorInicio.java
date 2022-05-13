@@ -1,7 +1,5 @@
 package com.plenium.plenium.web;
 
-import com.plenium.plenium.domain.Persona;
-import com.plenium.plenium.servicio.PersonaService;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,10 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @Slf4j
 public class ControladorInicio {
-    
-    @Autowired
-    private PersonaService personaService;
-    
+        
     @GetMapping("/panel-control")
     public String irPanelControl(){
         return "panel_control";
@@ -28,51 +23,14 @@ public class ControladorInicio {
     
     @GetMapping("/")
     public String inicio(Model model, @AuthenticationPrincipal User user){
-        var personas = personaService.listarPersonas();
-        log.info("ejecutando el controlador Spring MVC");
+
         log.info("usuario que hizo login:" + user.getUsername());
-        model.addAttribute("personas", personas);
         return "panel_control";
     }
+   
     
-    @GetMapping("/agregar")
-    public String agregar(Persona persona){
-        return "modificar";
-    }
-    
-    @PostMapping("/guardar")
-    public String guardar(@Valid Persona persona, Errors errores){
-        if(errores.hasErrors()){
-            return "modificar";
-        }
-        personaService.guardar(persona);
-        return "redirect:/";
-    }
-    
-    @GetMapping("/editar/{idPersona}")
-    public String editar(Persona persona, Model model){
-        persona = personaService.encontrarPersona(persona);
-        model.addAttribute("persona", persona);
-        return "modificar";
-    }
-    
-    @GetMapping("/eliminar")
-    public String eliminar(Persona persona){
-        personaService.eliminar(persona);
-        return "redirect:/";
-    }
+
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
