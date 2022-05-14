@@ -46,8 +46,12 @@ public class ControladorInicio {
         model.addAttribute("totalClientes", totalClientes);
 
         //Agenda de hoy
-        var listaTareasHoy = tareaService.listarTareas();
+        var listaTareasHoy = tareaService.listarTareasHoy();
         model.addAttribute("listaTareasHoy", listaTareasHoy);
+        
+        //Agenda de esta semana
+        var listaTareasSemana = tareaService.listarTareasSemana();
+        model.addAttribute("listaTareasSemana", listaTareasSemana);
 
         log.info("Usuario que hizo login: " + user.getUsername());
         return "panel_control";

@@ -89,8 +89,8 @@
             <!-- Divisor -->
             <hr class="sidebar-divider">
 
-             <!-- Titulo sección - Agenda -->
-             <div class="sidebar-heading">
+            <!-- Titulo sección - Agenda -->
+            <div class="sidebar-heading">
                 Agenda
             </div>
             <li class="nav-item">
@@ -184,8 +184,6 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Panel de Control</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
 
                     <!-- Content Row -->
@@ -198,7 +196,8 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Inmuebles en Cartera:</div>
-                                            <div class="h5 mb-3 font-weight-bold text-gray-800" th:text="${totalInmuebles}">0</div> 
+                                            <div class="h5 mb-3 font-weight-bold text-gray-800"
+                                                th:text="${totalInmuebles}">0</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-home fa-2x text-gray-300"></i>
@@ -215,7 +214,8 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Nº de Clientes:</div>
-                                            <div class="h5 mb-3 font-weight-bold text-gray-800" th:text="${totalClientes}">0</div> 
+                                            <div class="h5 mb-3 font-weight-bold text-gray-800"
+                                                th:text="${totalClientes}">0</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-user fa-2x text-gray-300"></i>
@@ -231,61 +231,157 @@
                     <div class="row">
 
                         <!-- Area Chart -->
-                        <div class="col-xl-8 col-lg-7">
+                        <div class="col-xl-12 col-lg-12">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Agenda de HOY:</h6>
-        
+
                                 </div>
                                 <!-- Card Body -->
-                                <div class="table-responsive"
-                                th:if="${listaTareasHoy != null and !listaTareasHoy.empty}">
+                                <!--<div class="table-responsive"
+                                    th:if="${listaTareasHoy != null and !listaTareasHoy.empty}">
 
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>Fecha de alta:</th>
-                                                <th>Fecha de vencimiento:</th>
-                                                <th>Tipo</th>
-                                                <th>Título</th>
-                                                <th>Acción</th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Fecha de alta:</th>
-                                                <th>Fecha de vencimiento:</th>
-                                                <th>Tipo</th>
-                                                <th>Título</th>
-                                                <th>Acción</th>
-                                            </tr>
-                                        </tfoot>
-                                        <tbody>
-                                            <tr th:each="tarea : ${listaTareasHoy}">
-                                                <td th:text="${tarea.fechaPublicacion}"></td>
-                                                <td th:text="${tarea.fechaVencimiento}"></td>
-                                                <td th:text="${tarea.tipo}"></td>
-                                                <td th:text="${tarea.titulo}"></td>
-                                                
-                                                <td> <a th:href="@{/ver-tarea/} + ${tarea.idTarea}"
-                                                        class="btn btn-secondary btn-icon-split btn-sm"><span
-                                                            class="icon text-white-50"> <i class="fas fa-eye">
-                                                            </i></span><span class="text">Detalles</span></a> </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Fecha de alta:</th>
+                                                    <th>Fecha de vencimiento:</th>
+                                                    <th>Tipo</th>
+                                                    <th>Título</th>
+                                                    <th>Acción</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="tarea : ${listaTareasHoy}">
+                                                    <td th:text="${tarea.fechaPublicacion}"></td>
+                                                    <td th:text="${tarea.fechaVencimiento}"></td>
+                                                    <td th:text="${tarea.tipo}"></td>
+                                                    <td th:text="${tarea.titulo}"></td>
+
+                                                    <td> <a th:href="@{/ver-tarea/} + ${tarea.idTarea}"
+                                                            class="btn btn-secondary btn-icon-split btn-sm"><span
+                                                                class="icon text-white-50"> <i class="fas fa-eye">
+                                                                </i></span><span class="text">Detalles</span></a> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
-                                <div th:if="${listaTareasHoy == null or listaTareasHoy.empty}">
-                                    La Agenda está vacía.
+                                <div th:if="${listaTareasSemana == null or listaTareasSemana.empty}">
+                                    <span style="padding: 10px, 10px, 10px, 30px;">La Agenda de hoy está vacía.</span>
+                                </div>-->
+                                <div class="card-body">
+                                    <!--TABLA-->
+                                    <div class="table-responsive"
+                                        th:if="${listaTareasHoy != null and !listaTareasHoy.empty}">
+        
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Fecha de alta:</th>
+                                                        <th>Fecha de vencimiento:</th>
+                                                        <th>Tipo</th>
+                                                        <th>Título</th>
+                                                        <th>Acción</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Fecha de alta:</th>
+                                                        <th>Fecha de vencimiento:</th>
+                                                        <th>Tipo</th>
+                                                        <th>Título</th>
+                                                        <th>Acción</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                    <tr th:each="tarea : ${listaTareasHoy}">
+                                                        <td th:text="${tarea.fechaPublicacion}"></td>
+                                                        <td th:text="${tarea.fechaVencimiento}"></td>
+                                                        <td th:text="${tarea.tipo}"></td>
+                                                        <td th:text="${tarea.titulo}"></td>
+                                                        
+                                                        <td> <a th:href="@{/ver-tarea/} + ${tarea.idTarea}"
+                                                                class="btn btn-secondary btn-icon-split btn-sm"><span
+                                                                    class="icon text-white-50"> <i class="fas fa-eye">
+                                                                    </i></span><span class="text">Detalles</span></a> </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>                               
+                                    </div>
+                                    <div th:if="${listaTareasHoy == null or listaTareasHoy.empty}">
+                                        <span style="padding: 10px, 10px, 10px, 30px;">La Agenda de hoy está vacía.</span>
+                                    </div>
                                 </div>
+
                             </div>
+
+                        </div>
+
+                        <!-- Area Chart -->
+                        <div class="col-xl-12 col-lg-12">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Agenda de ESTA SEMANA:</h6>
+
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <!--TABLA-->
+                                    <div class="table-responsive"
+                                        th:if="${listaTareasSemana != null and !listaTareasSemana.empty}">
+        
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Fecha de alta:</th>
+                                                        <th>Fecha de vencimiento:</th>
+                                                        <th>Tipo</th>
+                                                        <th>Título</th>
+                                                        <th>Acción</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>Fecha de alta:</th>
+                                                        <th>Fecha de vencimiento:</th>
+                                                        <th>Tipo</th>
+                                                        <th>Título</th>
+                                                        <th>Acción</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                    <tr th:each="tarea : ${listaTareasSemana}">
+                                                        <td th:text="${tarea.fechaPublicacion}"></td>
+                                                        <td th:text="${tarea.fechaVencimiento}"></td>
+                                                        <td th:text="${tarea.tipo}"></td>
+                                                        <td th:text="${tarea.titulo}"></td>
+                                                        
+                                                        <td> <a th:href="@{/ver-tarea/} + ${tarea.idTarea}"
+                                                                class="btn btn-secondary btn-icon-split btn-sm"><span
+                                                                    class="icon text-white-50"> <i class="fas fa-eye">
+                                                                    </i></span><span class="text">Detalles</span></a> </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>                               
+                                    </div>
+                                    <div th:if="${listaTareasSemana == null or listaTareasSemana.empty}">
+                                        <span style="padding: 10px, 10px, 10px, 30px;">La Agenda de esta semana está vacía.</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                    
+
                     </div>
 
                     <!-- Content Row -->
@@ -297,7 +393,7 @@
 
                         </div>
 
-       
+
                     </div>
 
                 </div>
@@ -357,7 +453,7 @@
         </div>
     </div>
 
- 
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

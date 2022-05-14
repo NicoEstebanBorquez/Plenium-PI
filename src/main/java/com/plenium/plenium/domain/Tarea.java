@@ -31,4 +31,19 @@ public class Tarea implements Serializable {
 
     private Long idUsuario;
 
+    public Tarea() {
+    }
+
+    public Tarea(Long idTarea, String tipo, Date fechaPublicacion, Date fechaVencimiento, String titulo, String descripcion, Long idUsuario) {
+        this.idTarea = idTarea;
+        this.tipo = tipo;
+        this.fechaPublicacion = fechaPublicacion;
+        this.fechaVencimiento = fechaVencimiento;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.idUsuario = idUsuario;
+    }
+    
+    
+
 }
