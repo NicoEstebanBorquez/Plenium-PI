@@ -80,10 +80,17 @@ public class UsuarioController {
     }
 
     @GetMapping("/editar-usuario/{idUsuario}")
-    public String editar(Usuario usuario, Model model) {
+    public String editar(Usuario usuario, Model model) { 
         usuario = usuarioService.encontrarUsuario(usuario);
         model.addAttribute("usuario", usuario);
         return "editar_usuario";
+    }
+    
+    @GetMapping("/editar-perfil/{idUsuario}")
+    public String editarPerfil(Usuario usuario, Model model) { 
+        usuario = usuarioService.encontrarUsuario(usuario);
+        model.addAttribute("usuario", usuario);
+        return "editar_perfil";
     }
 
     @GetMapping("/eliminar-usuario/{idUsuario}")

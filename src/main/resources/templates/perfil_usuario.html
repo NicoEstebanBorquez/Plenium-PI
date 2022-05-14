@@ -176,21 +176,15 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Información del Usuario</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Perfil</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <br>
-                            <a th:href="@{/lista-usuarios}" class="btn btn-secondary btn-icon-split btn-sm"><span
-                                    class="icon text-white-50"> <i class="fas fa-reply"> </i></span><span
-                                    class="text">Atrás</span></a>
-                            <a th:href="@{/editar-usuario/} + ${usuario.idUsuario}"
+                            <a th:href="@{/editar-perfil/} + ${usuario.idUsuario}"
                                 class="btn btn-success btn-icon-split btn-sm"><span class="icon text-white-50"> <i
-                                        class="fas fa-edit"> </i></span><span class="text">Editar usuario</span></a>
-                            <a th:href="@{/eliminar-usuario/} + ${usuario.idUsuario}"
-                                class="btn btn-danger btn-icon-split btn-sm"><span class="icon text-white-50"> <i
-                                        class="fas fa-trash"> </i></span><span class="text">Eliminar usuario</span></a>
+                                        class="fas fa-edit"> </i></span><span class="text">Editar perfil</span></a>
                         </div>
                         <div class="card-body">
                             <div class="table">
@@ -199,7 +193,7 @@
                                     <input type="hidden" name="idUsuario" th:field="*{idUsuario}" />
 
                                     <div class="form-row">
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-9">
                                             <h6 class="font-weight-bold"><u>Información general:</u></h6>
                                         </div>
                                         <div class="form-group col-md-3">

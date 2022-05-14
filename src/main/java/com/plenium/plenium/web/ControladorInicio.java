@@ -1,5 +1,6 @@
 package com.plenium.plenium.web;
 
+import com.plenium.plenium.domain.Usuario;
 import com.plenium.plenium.servicio.ClienteService;
 import com.plenium.plenium.servicio.InmuebleService;
 import com.plenium.plenium.servicio.TareaService;
@@ -36,11 +37,17 @@ public class ControladorInicio {
 
     @GetMapping("/")
     public String inicio(Model model, @AuthenticationPrincipal User user) {
-        
+        //Usuario logueado
+        Usuario usuario = usuarioService.encontrarUsuarioPorUsername(user.getUsername());
+        String idUsuario = usuario.getIdUsuario().toString();
+        model.addAttribute("idUsuario", idUsuario);
+        String nombreUsuario = "Usuario: " + usuario.getNombre() + " " + usuario.getPrimerApellido();
+        model.addAttribute("nombreUsuario", nombreUsuario);
+
         //Nº total de inmuebles
         int totalInmuebles = inmuebleService.totalInmuebles();
         model.addAttribute("totalInmuebles", totalInmuebles);
-        
+
         //Nº total de clientes
         int totalClientes = clienteService.totalClientes();
         model.addAttribute("totalClientes", totalClientes);
@@ -48,13 +55,25 @@ public class ControladorInicio {
         //Agenda de hoy
         var listaTareasHoy = tareaService.listarTareasHoy();
         model.addAttribute("listaTareasHoy", listaTareasHoy);
-        
+
         //Agenda de esta semana
         var listaTareasSemana = tareaService.listarTareasSemana();
         model.addAttribute("listaTareasSemana", listaTareasSemana);
 
-        log.info("Usuario que hizo login: " + user.getUsername());
         return "panel_control";
+    }
+
+    @GetMapping("/perfil-usuario/{idUsuario}")
+    public String verPerfil(Usuario usuario, Model model, @AuthenticationPrincipal User user) {
+        //Usuario logueado
+        String idUsuario = usuario.getIdUsuario().toString();
+        model.addAttribute("idUsuario", idUsuario);
+        String nombreUsuario = "Usuario: " + usuario.getNombre() + " " + usuario.getPrimerApellido();
+        model.addAttribute("nombreUsuario", nombreUsuario);
+
+        usuario = usuarioService.encontrarUsuario(usuario);
+        model.addAttribute("usuario", usuario);
+        return "perfil_usuario";
     }
 
 }
