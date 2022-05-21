@@ -56,7 +56,6 @@ public class UsuarioController {
     @PostMapping("/guardar-usuario-editado")
     public String guardarEditado(Usuario usuario, @RequestParam("password") String password) {
         
-
         //Roles del usuario
         Long idRol = usuario.getIdUsuario() + 1;
         Rol rolUser = new Rol(idRol, "ROLE_USER");

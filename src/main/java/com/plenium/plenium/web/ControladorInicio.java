@@ -65,14 +65,16 @@ public class ControladorInicio {
 
     @GetMapping("/perfil-usuario/{idUsuario}")
     public String verPerfil(Usuario usuario, Model model, @AuthenticationPrincipal User user) {
-        //Usuario logueado
-        String idUsuario = usuario.getIdUsuario().toString();
-        model.addAttribute("idUsuario", idUsuario);
-        String nombreUsuario = "Usuario: " + usuario.getNombre() + " " + usuario.getPrimerApellido();
-        model.addAttribute("nombreUsuario", nombreUsuario);
-
         usuario = usuarioService.encontrarUsuario(usuario);
         model.addAttribute("usuario", usuario);
+        
+        //Usuario logueado
+        Usuario usuario2 = usuarioService.encontrarUsuarioPorUsername(user.getUsername());
+        String idUsuario = usuario2.getIdUsuario().toString();
+        model.addAttribute("idUsuario", idUsuario);
+        String nombreUsuario = "Usuario: " + usuario2.getNombre() + " " + usuario2.getPrimerApellido();
+        model.addAttribute("nombreUsuario", nombreUsuario);
+        
         return "perfil_usuario";
     }
 
