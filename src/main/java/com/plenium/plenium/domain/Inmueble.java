@@ -86,14 +86,12 @@ public class Inmueble implements Serializable {
     @Email
     private String propietarioEmail;
 
-    private String imagen;
-
     private Long idUsuario;
 
     public Inmueble() {
     }
 
-    public Inmueble(Long idInmueble, Date fechaPublicacion, String denominacion, String tipo, Integer precio, Integer superficieUtil, Integer superficieTotal, String direccion, String poblacion, String provincia, Integer dormitorios, Integer banos, String amueblado, String cocinaEquipada, String aireAcondicionado, String calefaccionCentral, String gasNatural, String placasSolares, String armariosEmpotrados, String terraza, String aparcamiento, String ascensor, String piscina, String jardin, String propietarioNombre, String propietarioApellidos, String propietarioNif, String propietarioTelefono, String propietarioEmail, String imagen, Long idUsuario) {
+    public Inmueble(Long idInmueble, Date fechaPublicacion, String denominacion, String tipo, Integer precio, Integer superficieUtil, Integer superficieTotal, String direccion, String poblacion, String provincia, Integer dormitorios, Integer banos, String amueblado, String cocinaEquipada, String aireAcondicionado, String calefaccionCentral, String gasNatural, String placasSolares, String armariosEmpotrados, String terraza, String aparcamiento, String ascensor, String piscina, String jardin, String propietarioNombre, String propietarioApellidos, String propietarioNif, String propietarioTelefono, String propietarioEmail, Long idUsuario) {
         this.idInmueble = idInmueble;
         this.fechaPublicacion = fechaPublicacion;
         this.denominacion = denominacion;
@@ -123,7 +121,6 @@ public class Inmueble implements Serializable {
         this.propietarioNif = propietarioNif;
         this.propietarioTelefono = propietarioTelefono;
         this.propietarioEmail = propietarioEmail;
-        this.imagen = imagen;
         this.idUsuario = idUsuario;
     }
 

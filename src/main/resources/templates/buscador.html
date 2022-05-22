@@ -281,7 +281,6 @@
                                         <thead>
                                             <tr>
                                                 <th>Ref.</th>
-                                                <th>Imagen</th>
                                                 <th>Tipo</th>
                                                 <th>Denominación</th>
                                                 <th>Precio</th>
@@ -294,7 +293,6 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Ref.</th>
-                                                <th>Imagen</th>
                                                 <th>Tipo</th>
                                                 <th>Denominación</th>
                                                 <th>Precio</th>
@@ -307,8 +305,6 @@
                                         <tbody>
                                             <tr th:each="inmueble : ${listaInmueblesModel}">
                                                 <td th:text="${inmueble.idInmueble}"></td>
-                                                <td style="width: 150px;"> <img th:src="${inmueble.imagen}"
-                                                        style="width: 150px;" /> </td>
                                                 <td th:text="${inmueble.tipo}" style="text-transform:uppercase;"></td>
                                                 <td th:text="${inmueble.denominacion}"></td>
                                                 <td th:text="${inmueble.precio} + €"></td>

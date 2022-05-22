@@ -3,6 +3,7 @@ package com.plenium.plenium.web;
 import com.plenium.plenium.domain.Cliente;
 import com.plenium.plenium.domain.Usuario;
 import com.plenium.plenium.servicio.ClienteService;
+import com.plenium.plenium.servicio.InmuebleService;
 import com.plenium.plenium.servicio.UsuarioService;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @Slf4j
@@ -22,6 +24,8 @@ public class ClienteController {
 
     @Autowired
     private ClienteService clienteService;
+    @Autowired
+    private InmuebleService inmuebleService;
     @Autowired
     private UsuarioService usuarioService;
 
@@ -38,7 +42,7 @@ public class ClienteController {
     }
 
     @PostMapping("/guardar-cliente")
-    public String guardar(@Valid Cliente cliente, Errors errores, @AuthenticationPrincipal User user) {
+    public String guardar(@Valid Cliente cliente, Errors errores, @AuthenticationPrincipal User user, RedirectAttributes attribute) {
         if (errores.hasErrors()) {
             return "nuevo_cliente";
         }
@@ -51,15 +55,33 @@ public class ClienteController {
         //Usuario que realiza la acción:
         Usuario usuario = usuarioService.encontrarUsuarioPorUsername(user.getUsername());
         cliente.setIdUsuario(usuario.getIdUsuario());
-
+        
         clienteService.guardar(cliente);
+
+        attribute.addFlashAttribute("exito", "Cliente guardado correctamente.");
         return "redirect:/lista-clientes";
     }
 
     @GetMapping("/ver-cliente/{idCliente}")
     public String ver(Cliente cliente, Usuario usuario, Model model, @AuthenticationPrincipal User user) {
         cliente = clienteService.encontrarCliente(cliente);
-        usuario = usuarioService.encontrarUsuarioPorUsername(user.getUsername());
+
+        //Usuario responsable del listado
+        usuario = usuarioService.encontrarUsuarioPorId(cliente.getIdUsuario());
+
+        //Inmuebles relacionados
+        var listaInmuebles = inmuebleService.buscarInmuebles(
+                cliente.getPrecioMin(),
+                cliente.getPrecioMax(),
+                cliente.getDormitoriosMin(),
+                cliente.getDormitoriosMax(),
+                cliente.getSuperficieMin(),
+                cliente.getSuperficieMax(),
+                cliente.getTipo(),
+                cliente.getLocalidad(),
+                cliente.getProvincia()
+        );
+        model.addAttribute("listaInmueblesModel", listaInmuebles);
 
         model.addAttribute("cliente", cliente);
         model.addAttribute("usuario", usuario);

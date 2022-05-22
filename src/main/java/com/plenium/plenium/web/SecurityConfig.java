@@ -31,16 +31,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/editar/**", "/agregar/**", "/eliminar")
-                        .hasRole("ADMIN")
-                    .antMatchers("/")
-                        .hasAnyRole("USER", "ADMIN")
-                    .and()
-                        .formLogin()
-                        .loginPage("/login")
-                    .and()
+                .antMatchers("/cartera-inmuebles", "/nuevo-inmueble", "/ver-inmueble", "/buscador", "/lista-clientes", "/nuevo-cliente", "/ver-cliente", "/lista-tareas", "/nueva-tarea", "/ver-tarea", "/lista-usuarios", "/nuevo-usuario", "/ver-usuario")
+                .hasRole("ADMIN")
+                .antMatchers("/", "/cartera-inmuebles", "/nuevo-inmueble", "/ver-inmueble", "/buscador", "/lista-clientes", "/nuevo-cliente", "/ver-cliente", "/lista-tareas", "/nueva-tarea", "/ver-tarea")
+                .hasAnyRole("USER", "ADMIN")
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .and()
                 .exceptionHandling().accessDeniedPage("/errores/403");
     }
-    
-    
 }

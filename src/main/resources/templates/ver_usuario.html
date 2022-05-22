@@ -154,7 +154,7 @@
                             <a th:href="@{/editar-usuario/} + ${usuario.idUsuario}"
                                 class="btn btn-success btn-icon-split btn-sm"><span class="icon text-white-50"> <i
                                         class="fas fa-edit"> </i></span><span class="text">Editar usuario</span></a>
-                            <a th:href="@{/eliminar-usuario/} + ${usuario.idUsuario}"
+                            <a th:href="@{/eliminar-usuario/} + ${usuario.idUsuario}" th:onclick="if(!(confirm('¿Está seguro de que desea eliminar este usuario?') )) return false"
                                 class="btn btn-danger btn-icon-split btn-sm"><span class="icon text-white-50"> <i
                                         class="fas fa-trash"> </i></span><span class="text">Eliminar usuario</span></a>
                         </div>

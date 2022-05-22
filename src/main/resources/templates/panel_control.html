@@ -241,29 +241,20 @@
                                         th:if="${listaTareasHoy != null and !listaTareasHoy.empty}">
         
                                         <div class="table-responsive">
-                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <table class="table table-bordered" width="100%" cellspacing="0">
                                                 <thead>
                                                     <tr>
-                                                        <th>Fecha de alta:</th>
                                                         <th>Fecha de vencimiento:</th>
+                                                        <th>Hora:</th>
                                                         <th>Tipo</th>
                                                         <th>Título</th>
                                                         <th>Acción</th>
                                                     </tr>
                                                 </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th>Fecha de alta:</th>
-                                                        <th>Fecha de vencimiento:</th>
-                                                        <th>Tipo</th>
-                                                        <th>Título</th>
-                                                        <th>Acción</th>
-                                                    </tr>
-                                                </tfoot>
                                                 <tbody>
                                                     <tr th:each="tarea : ${listaTareasHoy}">
-                                                        <td th:text="${tarea.fechaPublicacion}"></td>
                                                         <td th:text="${tarea.fechaVencimiento}"></td>
+                                                        <td th:text="${tarea.hora}"></td>
                                                         <td th:text="${tarea.tipo}"></td>
                                                         <td th:text="${tarea.titulo}"></td>
                                                         
@@ -301,29 +292,20 @@
                                         th:if="${listaTareasSemana != null and !listaTareasSemana.empty}">
         
                                         <div class="table-responsive">
-                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <table class="table table-bordered" width="100%" cellspacing="0">
                                                 <thead>
                                                     <tr>
-                                                        <th>Fecha de alta:</th>
                                                         <th>Fecha de vencimiento:</th>
+                                                        <th>Hora:</th>
                                                         <th>Tipo</th>
                                                         <th>Título</th>
                                                         <th>Acción</th>
                                                     </tr>
                                                 </thead>
-                                                <!--<tfoot>
-                                                    <tr>
-                                                        <th>Fecha de alta:</th>
-                                                        <th>Fecha de vencimiento:</th>
-                                                        <th>Tipo</th>
-                                                        <th>Título</th>
-                                                        <th>Acción</th>
-                                                    </tr>
-                                                </tfoot>-->
                                                 <tbody>
                                                     <tr th:each="tarea : ${listaTareasSemana}">
-                                                        <td th:text="${tarea.fechaPublicacion}"></td>
                                                         <td th:text="${tarea.fechaVencimiento}"></td>
+                                                        <td th:text="${tarea.hora}"></td>
                                                         <td th:text="${tarea.tipo}"></td>
                                                         <td th:text="${tarea.titulo}"></td>
                                                         

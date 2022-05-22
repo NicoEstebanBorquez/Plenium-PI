@@ -89,7 +89,7 @@
             <!-- Divisor -->
             <hr class="sidebar-divider">
 
-              <!-- Titulo sección - Agenda -->
+            <!-- Titulo sección - Agenda -->
             <div class="sidebar-heading">
                 Agenda
             </div>
@@ -143,7 +143,12 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Cartera de Inmuebles</h1>
-
+                    
+                    <!-- Message -->
+                    <div class="alert alert-success alert-dismissible" th:if="${exito != null}">
+                        <label th:text="${exito}"></label>
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -161,7 +166,6 @@
                                     <thead>
                                         <tr>
                                             <th>Ref.</th>
-                                            <!--<th>Imagen</th>-->
                                             <th>Tipo</th>
                                             <th>Denominación</th>
                                             <th>Precio</th>
@@ -174,7 +178,6 @@
                                     <tfoot>
                                         <tr>
                                             <th>Ref.</th>
-                                            <!--<th>Imagen</th>-->
                                             <th>Tipo</th>
                                             <th>Denominación</th>
                                             <th>Precio</th>
@@ -187,19 +190,17 @@
                                     <tbody>
                                         <tr th:each="inmueble : ${listaInmueblesModel}">
                                             <td th:text="${inmueble.idInmueble}"></td>
-                                            <!--<td style="width: 150px;"> <img th:src="${inmueble.imagen}"
-                                                    style="width: 150px;" /> </td>-->
                                             <td th:text="${inmueble.tipo}" style="text-transform:uppercase;"></td>
                                             <td th:text="${inmueble.denominacion}"></td>
                                             <td th:text="${inmueble.precio} + €"></td>
                                             <td th:text="${inmueble.superficieTotal}"></td>
                                             <td th:text="${inmueble.poblacion}"></td>
                                             <td th:text="${inmueble.provincia}"></td>
-                                            <td> 
+                                            <td>
                                                 <a th:href="@{/ver-inmueble/} + ${inmueble.idInmueble}"
                                                     class="btn btn-secondary btn-icon-split btn-sm"><span
                                                         class="icon text-white-50"> <i class="fas fa-eye">
-                                                        </i></span><span class="text" >Detalles</span></a>
+                                                        </i></span><span class="text">Detalles</span></a>
                                             </td>
                                         </tr>
                                     </tbody>

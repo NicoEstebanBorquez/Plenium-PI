@@ -89,8 +89,8 @@
             <!-- Divisor -->
             <hr class="sidebar-divider">
 
-             <!-- Titulo sección - Agenda -->
-             <div class="sidebar-heading">
+            <!-- Titulo sección - Agenda -->
+            <div class="sidebar-heading">
                 Agenda
             </div>
             <li class="nav-item">
@@ -154,7 +154,7 @@
                             <a th:href="@{/editar-cliente/} + ${cliente.idCliente}"
                                 class="btn btn-success btn-icon-split btn-sm"><span class="icon text-white-50"> <i
                                         class="fas fa-edit"> </i></span><span class="text">Editar cliente</span></a>
-                            <a th:href="@{/eliminar-cliente/} + ${cliente.idCliente}"
+                            <a th:href="@{/eliminar-cliente/} + ${cliente.idCliente}" th:onclick="if(!(confirm('¿Está seguro de que desea eliminar este cliente?') )) return false"
                                 class="btn btn-danger btn-icon-split btn-sm"><span class="icon text-white-50"> <i
                                         class="fas fa-trash"> </i></span><span class="text">Eliminar cliente</span></a>
                         </div>
@@ -292,171 +292,50 @@
                                             </div>
                                         </div>
                                     </form>
-                                </form>
-                            </div>
 
-                        </div>
-                    </div>
-
-                </div>
-                <!-- /.container-fluid -->
-
-
-
-
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Inmuebles seleccionados:</h1>
-
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <br>
-                            <a th:href="@{/lista-clientes}" class="btn btn-secondary btn-icon-split btn-sm"><span
-                                    class="icon text-white-50"> <i class="fas fa-reply"> </i></span><span
-                                    class="text">Atrás</span></a>
-                            <a th:href="@{/editar-cliente/} + ${cliente.idCliente}"
-                                class="btn btn-success btn-icon-split btn-sm"><span class="icon text-white-50"> <i
-                                        class="fas fa-edit"> </i></span><span class="text">Editar cliente</span></a>
-                            <a th:href="@{/eliminar-cliente/} + ${cliente.idCliente}"
-                                class="btn btn-danger btn-icon-split btn-sm"><span class="icon text-white-50"> <i
-                                        class="fas fa-trash"> </i></span><span class="text">Eliminar cliente</span></a>
-                        </div>
-                        <div class="card-body">
-                            <div class="table">
-
-                                <form th:object="${cliente}" class="user">
-                                    <input type="hidden" name="idCliente" th:field="*{idCliente}" />
-
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <h6 class="font-weight-bold"><u>Información general:</u></h6>
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="estado" class="font-weight-bold">Estado:</label>
-                                            <label th:text="*{estado}"></label>
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="fechaAlta" class="font-weight-bold">Fecha de alta:</label>
-                                            <label th:text="*{fechaAlta}"></label>
-                                        </div>
-                                    </div>
-
-                                    <!-- ----------------------- ROW ----------------------- -->
-                                    <div class="form-row">
-                                        <div class="form-group col-md-4">
-                                            <label for="nombre" class="font-weight-bold">Nombre:</label>
-                                            <label th:text="*{nombre}"></label>
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="primerApellido" class="font-weight-bold">Primer
-                                                apellido:</label>
-                                            <label th:text="*{primerApellido}"></label>
-                                        </div>
-
-                                        <div class="form-group col-md-4">
-                                            <label for="segundoApellido" class="font-weight-bold">Segundo
-                                                apellido:</label>
-                                            <label th:text="*{segundoApellido}"></label>
-                                        </div>
-                                    </div>
-                                    <!-- ----------------------- ROW ----------------------- -->
-                                    <div class="form-row">
-                                        <div class="form-group col-md-4">
-                                            <label for="documentoIdentidad" class="font-weight-bold">Documento de
-                                                identidad:</label>
-                                            <label th:text="*{documentoIdentidad}"></label>
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="email" class="font-weight-bold">Correo electrónico:</label>
-                                            <label th:text="*{email}"></label>
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="telefono" class="font-weight-bold">Teléfono:</label>
-                                            <label th:text="*{telefono}"></label>
-                                        </div>
-                                    </div>
-                                    <!-- ----------------------- ROW ----------------------- -->
                                     <hr>
-                                    <h6 class="font-weight-bold"><u>Preferencias de búsqueda:</u></h6>
-
-                                    <div class="form-row">
-                                        <div class="form-group col-md-4">
-                                            <label for="tipo" class="font-weight-bold">Tipo:</label>
-                                            <label th:text="*{tipo}"></label>
+                                    <h6 class="font-weight-bold"><u>Inmuebles seleccionados:</u></h6>
+                                    <div class="card-body">
+                                        <!--TABLA-->
+                                        <div class="table-responsive"
+                                            th:if="${listaInmueblesModel != null and !listaInmueblesModel.empty}">
+                                            <table class="table table-bordered" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Ref.</th>
+                                                        <th>Tipo</th>
+                                                        <th>Denominación</th>
+                                                        <th>Precio</th>
+                                                        <th>m<sup>2</sup></th>
+                                                        <th>Población</th>
+                                                        <th>Provincia</th>
+                                                        <th>Acción</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr th:each="inmueble : ${listaInmueblesModel}">
+                                                        <td th:text="${inmueble.idInmueble}"></td>
+                                                        <td th:text="${inmueble.tipo}" style="text-transform:uppercase;"></td>
+                                                        <td th:text="${inmueble.denominacion}"></td>
+                                                        <td th:text="${inmueble.precio} + €"></td>
+                                                        <td th:text="${inmueble.superficieTotal}"></td>
+                                                        <td th:text="${inmueble.poblacion}"></td>
+                                                        <td th:text="${inmueble.provincia}"></td>
+                                                        <td>
+                                                            <a th:href="@{/ver-inmueble/} + ${inmueble.idInmueble}"
+                                                                class="btn btn-secondary btn-icon-split btn-sm"><span
+                                                                    class="icon text-white-50"> <i class="fas fa-eye">
+                                                                    </i></span><span class="text">Detalles</span></a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="precioMin" class="font-weight-bold">Precio (min):</label>
-                                            <label th:text="*{precioMin} + €"></label>
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="precioMax" class="font-weight-bold">Precio (max):</label>
-                                            <label th:text="*{precioMax} + €"></label>
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="form-row">
-                                        <div class="form-group col-md-3">
-                                            <label for="dormitoriosMin" class="font-weight-bold">Dormitorios
-                                                (min):</label>
-                                            <label th:text="*{dormitoriosMin}"></label>
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="dormitoriosMax" class="font-weight-bold">Dormitorios
-                                                (max):</label>
-                                            <label th:text="*{dormitoriosMax}"></label>
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="superficieMin" class="font-weight-bold">Superficie
-                                                (min):</label>
-                                            <label th:text="*{superficieMin} + m"></label><sup>2</sup>
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="superficieMax" class="font-weight-bold">Superficie
-                                                (máx):</label>
-                                            <label th:text="*{superficieMax} + m"></label><sup>2</sup>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-row">
-                                        <div class="form-group col-md-4">
-                                            <label for="localidad" class="font-weight-bold">Localidad:</label>
-                                            <label th:text="*{localidad}"></label>
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label for="provincia" class="font-weight-bold">Provincia:</label>
-                                            <label th:text="*{provincia}"></label>
+                                        <div th:if="${listaInmueblesModel == null or listaInmueblesModel.empty}">
+                                            No se han encontrado inmuebles que coincidan con los parámetros de búsqueda de este cliente.
                                         </div>
                                     </div>
 
-                                    <!-- ----------------------- ROW ----------------------- -->
-                                    <form th:object="${usuario}" class="user">
-                                        <hr>
-                                        <h6 class="font-weight-bold"><u>Usuario responsable del listado:</u></h6>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="nombre" class="font-weight-bold">Nombre:</label>
-                                                <label th:text="*{nombre}"></label>
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="primerApellido" class="font-weight-bold">Apellidos:</label>
-                                                <label th:text="*{primerApellido} +' '+ *{segundoApellido}"></label>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label for="telefono" class="font-weight-bold">Teléfono:</label>
-                                                <label th:text="*{telefono}"></label>
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="email" class="font-weight-bold">Correo electrónico:</label>
-                                                <label th:text="*{email}"></label>
-                                            </div>
-                                        </div>
-                                    </form>
                                 </form>
                             </div>
 

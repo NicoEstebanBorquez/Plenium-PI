@@ -23,9 +23,11 @@ public class Tarea implements Serializable {
 
     private Date fechaVencimiento;
 
+    private String hora;
+
     @NotEmpty
     private String titulo;
-    
+
     @NotEmpty
     private String descripcion;
 
@@ -34,16 +36,15 @@ public class Tarea implements Serializable {
     public Tarea() {
     }
 
-    public Tarea(Long idTarea, String tipo, Date fechaPublicacion, Date fechaVencimiento, String titulo, String descripcion, Long idUsuario) {
+    public Tarea(Long idTarea, String tipo, Date fechaPublicacion, Date fechaVencimiento, String hora, String titulo, String descripcion, Long idUsuario) {
         this.idTarea = idTarea;
         this.tipo = tipo;
         this.fechaPublicacion = fechaPublicacion;
         this.fechaVencimiento = fechaVencimiento;
+        this.hora = hora;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.idUsuario = idUsuario;
     }
-    
-    
 
 }

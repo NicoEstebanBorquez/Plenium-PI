@@ -171,10 +171,9 @@ public class InmuebleServiceImpl implements InmuebleService {
                 String propietarioTelefono = rs.getString(28);
                 String propietarioEmail = rs.getString(29);
 
-                String imagen = rs.getString(30);
-                Long idUsuario = rs.getLong(31);
+                Long idUsuario = rs.getLong(30);
 
-                inmueble = new Inmueble(idInmueble, fechaPublicacion, denominacion, tipo, precio, superficieUtil, superficieTotal, direccion, poblacion, provincia, dormitorios, banos, amueblado, cocinaEquipada, aireAcondicionado, calefaccionCentral, gasNatural, placasSolares, armariosEmpotrados, terraza, aparcamiento, ascensor, piscina, jardin, propietarioNombre, propietarioApellidos, propietarioNif, propietarioTelefono, propietarioEmail, imagen, idUsuario);
+                inmueble = new Inmueble(idInmueble, fechaPublicacion, denominacion, tipo, precio, superficieUtil, superficieTotal, direccion, poblacion, provincia, dormitorios, banos, amueblado, cocinaEquipada, aireAcondicionado, calefaccionCentral, gasNatural, placasSolares, armariosEmpotrados, terraza, aparcamiento, ascensor, piscina, jardin, propietarioNombre, propietarioApellidos, propietarioNif, propietarioTelefono, propietarioEmail, idUsuario);
                 lista.add(inmueble);
             }
 

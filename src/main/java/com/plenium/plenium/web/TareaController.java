@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @Slf4j
@@ -38,7 +39,7 @@ public class TareaController {
     }
 
     @PostMapping("/guardar-tarea")
-    public String guardar(@Valid Tarea tarea, Errors errores, @AuthenticationPrincipal User user) {
+    public String guardar(@Valid Tarea tarea, Errors errores, @AuthenticationPrincipal User user,RedirectAttributes attribute) {
         if (errores.hasErrors()) {
             return "nueva_tarea";
         }
@@ -53,14 +54,18 @@ public class TareaController {
         tarea.setIdUsuario(usuario.getIdUsuario());
 
         tareaService.guardar(tarea);
+        attribute.addFlashAttribute("exito", "Tarea guardada correctamente.");
         return "redirect:/lista-tareas";
     }
 
     @GetMapping("/ver-tarea/{idTarea}")
     public String ver(Tarea tarea, Usuario usuario, Model model, @AuthenticationPrincipal User user) {
         tarea = tareaService.encontrarTarea(tarea);
-        usuario = usuarioService.encontrarUsuarioPorUsername(user.getUsername());
-
+        
+        //Usuario responsable del listado
+        usuario = usuarioService.encontrarUsuarioPorId(tarea.getIdUsuario());
+        
+        
         model.addAttribute("tarea", tarea);
         model.addAttribute("usuario", usuario);
         return "ver_tarea";

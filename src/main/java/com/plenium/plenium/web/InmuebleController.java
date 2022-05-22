@@ -16,6 +16,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @Slf4j
@@ -39,7 +40,7 @@ public class InmuebleController {
     }
 
     @PostMapping("/guardar-inmueble")
-    public String guardar(@Valid Inmueble inmueble, Errors errores, @AuthenticationPrincipal User user) {
+    public String guardar(@Valid Inmueble inmueble, Errors errores, @AuthenticationPrincipal User user, RedirectAttributes attribute) {
         if (errores.hasErrors()) {
             return "nuevo_inmueble";
         }
@@ -54,18 +55,23 @@ public class InmuebleController {
         inmueble.setIdUsuario(usuario.getIdUsuario());
 
         inmuebleService.guardar(inmueble);
+
+        attribute.addFlashAttribute("exito", "Inmueble guardado correctamente.");
         return "redirect:/cartera-inmuebles";
     }
 
     @GetMapping("/ver-inmueble/{idInmueble}")
     public String ver(Inmueble inmueble, Usuario usuario, Model model, @AuthenticationPrincipal User user) {
         inmueble = inmuebleService.encontrarInmueble(inmueble);
-        usuario = usuarioService.encontrarUsuarioPorUsername(user.getUsername());
+                
+        //Usuario responsable del listado
+        usuario = usuarioService.encontrarUsuarioPorId(inmueble.getIdUsuario());
 
         model.addAttribute("inmueble", inmueble);
         model.addAttribute("usuario", usuario);
         return "ver_inmueble";
     }
+    
 
     @GetMapping("/editar-inmueble/{idInmueble}")
     public String editar(Inmueble inmueble, Model model) {

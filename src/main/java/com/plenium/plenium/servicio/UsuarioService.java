@@ -68,6 +68,11 @@ public class UsuarioService implements UserDetailsService {
     }
 
     @Transactional(readOnly = true)
+    public Usuario encontrarUsuarioPorId(Long id) {
+        return usuarioDao.findById(id).orElse(null);
+    }
+    
+    @Transactional(readOnly = true)
     public Usuario encontrarUsuarioPorUsername(String username) {
         return usuarioDao.findByUsername(username);
     }

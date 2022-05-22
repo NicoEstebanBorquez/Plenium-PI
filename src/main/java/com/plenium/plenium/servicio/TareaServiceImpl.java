@@ -77,11 +77,12 @@ public class TareaServiceImpl implements TareaService {
                 String tipo = rs.getString(2);
                 Date fechaPublicacion = rs.getDate(3);
                 Date fechaVencimiento = rs.getDate(4);
-                String titulo = rs.getString(5);
-                String descripcion = rs.getString(6);
-                Long idUsuario = rs.getLong(7);
+                String hora = rs.getString(5);
+                String titulo = rs.getString(6);
+                String descripcion = rs.getString(7);
+                Long idUsuario = rs.getLong(8);
 
-                tarea = new Tarea(idTarea, tipo, fechaPublicacion, fechaVencimiento, titulo, descripcion, idUsuario);
+                tarea = new Tarea(idTarea, tipo, fechaPublicacion, fechaVencimiento, hora, titulo, descripcion, idUsuario);
                 lista.add(tarea);
             }
 
@@ -127,8 +128,6 @@ public class TareaServiceImpl implements TareaService {
             ps.setString(1, fechaActualStr);
             ps.setString(2, fechaSemanaStr);
 
-            
-            
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -136,11 +135,12 @@ public class TareaServiceImpl implements TareaService {
                 String tipo = rs.getString(2);
                 Date fechaPublicacion = rs.getDate(3);
                 Date fechaVencimiento = rs.getDate(4);
-                String titulo = rs.getString(5);
-                String descripcion = rs.getString(6);
-                Long idUsuario = rs.getLong(7);
+                String hora = rs.getString(5);
+                String titulo = rs.getString(6);
+                String descripcion = rs.getString(7);
+                Long idUsuario = rs.getLong(8);
 
-                tarea = new Tarea(idTarea, tipo, fechaPublicacion, fechaVencimiento, titulo, descripcion, idUsuario);
+                tarea = new Tarea(idTarea, tipo, fechaPublicacion, fechaVencimiento, hora, titulo, descripcion, idUsuario);
                 lista.add(tarea);
             }
 

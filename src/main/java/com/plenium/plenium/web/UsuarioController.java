@@ -15,6 +15,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @Slf4j
@@ -36,7 +37,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/guardar-usuario")
-    public String guardar(@Valid Usuario usuario, Errors errores, @RequestParam("password") String password) {
+    public String guardar(@Valid Usuario usuario, Errors errores, @RequestParam("password") String password, RedirectAttributes attribute) {
         if (errores.hasErrors()) {
             return "nuevo_usuario";
         }
@@ -49,25 +50,30 @@ public class UsuarioController {
         //Encriptacion de la contraseña
         String passwordEncriptada = EncriptarPassword.encriptarPassword(password);
         usuario.setPassword(passwordEncriptada);
+
         usuarioService.guardar(usuario);
+
+        attribute.addFlashAttribute("exito", "Usuario guardado correctamente.");
         return "redirect:/lista-usuarios";
     }
 
     @PostMapping("/guardar-usuario-editado")
-    public String guardarEditado(Usuario usuario, @RequestParam("password") String password) {
-        
+    public String guardarEditado(Usuario usuario, @RequestParam("password") String password, RedirectAttributes attribute) {
+
         //Roles del usuario
         Long idRol = usuario.getIdUsuario() + 1;
         Rol rolUser = new Rol(idRol, "ROLE_USER");
         List<Rol> listaRoles = new ArrayList<Rol>();
         listaRoles.add(rolUser);
         usuario.setRoles(listaRoles);
-        
-         //Encriptacion de la nueva contraseña
+
+        //Encriptacion de la nueva contraseña
         String passwordEncriptada = EncriptarPassword.encriptarPassword(password);
         usuario.setPassword(passwordEncriptada);
-        
+
         usuarioService.guardar(usuario);
+
+        attribute.addFlashAttribute("exito", "Usuario guardado correctamente.");
         return "redirect:/lista-usuarios";
     }
 
@@ -79,14 +85,14 @@ public class UsuarioController {
     }
 
     @GetMapping("/editar-usuario/{idUsuario}")
-    public String editar(Usuario usuario, Model model) { 
+    public String editar(Usuario usuario, Model model) {
         usuario = usuarioService.encontrarUsuario(usuario);
         model.addAttribute("usuario", usuario);
         return "editar_usuario";
     }
-    
+
     @GetMapping("/editar-perfil/{idUsuario}")
-    public String editarPerfil(Usuario usuario, Model model) { 
+    public String editarPerfil(Usuario usuario, Model model) {
         usuario = usuarioService.encontrarUsuario(usuario);
         model.addAttribute("usuario", usuario);
         return "editar_perfil";
